@@ -63,7 +63,7 @@
 	</button>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		font-family: Arial, Helvetica, sans-serif;
 		text-align: center;
