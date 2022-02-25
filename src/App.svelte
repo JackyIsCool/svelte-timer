@@ -18,7 +18,9 @@
 			secondLeft = parseInt(formatedHour) * 3600 + parseInt(formatedMinute) * 60 + parseInt(formatedSecond);	
 		}
 		else {
-			secondLeft = secondLeft + 0;//Not working, we need to reassign the formated number when input is not correct
+			formatedHour = String(Math.floor(secondLeft / 3600)).padStart(2, '0');
+			formatedMinute = String(Math.floor(secondLeft % 3600 / 60)).padStart(2, '0');
+			formatedSecond = String(Math.floor(secondLeft % 60)).padStart(2, '0');
 		}
 	}
 	function alertTimeUp() {
