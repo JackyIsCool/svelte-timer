@@ -14,14 +14,7 @@
 		secondLeft --;
 	}
 	function syncTypedTime() {
-		if (typeof formatedHour == "number" && typeof formatedMinute == "number" && typeof formatedSecond == "number") {
-			secondLeft = parseInt(formatedHour) * 3600 + parseInt(formatedMinute) * 60 + parseInt(formatedSecond);	
-		}
-		else {
-			formatedHour = String(Math.floor(secondLeft / 3600)).padStart(2, '0');
-			formatedMinute = String(Math.floor(secondLeft % 3600 / 60)).padStart(2, '0');
-			formatedSecond = String(Math.floor(secondLeft % 60)).padStart(2, '0');
-		}
+		secondLeft = parseInt(formatedHour) * 3600 + parseInt(formatedMinute) * 60 + parseInt(formatedSecond);
 	}
 	function alertTimeUp() {
 		alert("Time Up");
@@ -40,22 +33,22 @@
 <main>
 	<section>
 		<div class="button-container">
-			<button on:click={() => addTime(3600)}>+1h</button>
-			<button on:click={() => addTime(60)}>+1m</button>
-			<button on:click={() => addTime(1)}>+1s</button>
+			<button on:click={() => addTime(3600)}>👆</button>
+			<button on:click={() => addTime(60)}>👆</button>
+			<button on:click={() => addTime(1)}>👆</button>
 		</div>
 		<div class="time-container">
-			<input on:blur={syncTypedTime} bind:value={formatedHour} class="time-text"/>
+			<input type="number" on:blur={syncTypedTime} bind:value={formatedHour} class="time-text"/>
 			<div class="time-text">:</div>
-			<input on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text"/>
+			<input type="number" on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text"/>
 			<div class="time-text">:</div>
-			<input on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text"/>
+			<input type="number" on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text"/>
 		</div>
 
 		<div class="button-container">
-			<button on:click={() => addTime(-3600)}>-1h</button>
-			<button on:click={() => addTime(-60)}>-1m</button>
-			<button on:click={() => addTime(-1)}>-1s</button>
+			<button on:click={() => addTime(-3600)}>👇</button>
+			<button on:click={() => addTime(-60)}>👇</button>
+			<button on:click={() => addTime(-1)}>👇</button>
 		</div>
 	</section>
 	<button on:click={toggleOnOff}>
@@ -77,7 +70,7 @@
 	}
 	.button-container {
 		display: flex;
-		justify-content: center;
+		justify-content: space-evenly;
 	}
 	button {
 		border: none;
