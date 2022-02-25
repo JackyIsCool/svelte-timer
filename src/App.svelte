@@ -28,6 +28,9 @@
 			}
 		}
 	}, 1000);
+	setInterval(() => {
+		console.log(secondLeft);
+	}, 10)
 </script>
 
 <main>
@@ -37,13 +40,13 @@
 			<button on:click={() => addTime(60)}>👆</button>
 			<button on:click={() => addTime(1)}>👆</button>
 		</div>
-		<div class="time-container">
+		<form class="time-container">
 			<input type="number" on:blur={syncTypedTime} bind:value={formatedHour} class="time-text"/>
 			<div class="time-text">:</div>
 			<input type="number" on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text"/>
 			<div class="time-text">:</div>
 			<input type="number" on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text"/>
-		</div>
+		</form>
 
 		<div class="button-container">
 			<button on:click={() => addTime(-3600)}>👇</button>
@@ -98,5 +101,14 @@
 	.time-container:focus-within  input:not(:focus) {
 		opacity: .4;
 		transition: 200ms;
+	}
+	/* Disable the up and down button when hovering on the input box */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	input[type=number] {
+		-moz-appearance: textfield;
 	}
 </style>
