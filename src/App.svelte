@@ -1,5 +1,5 @@
 <script>
-	$: secondLeft = 0;//In second
+	let secondLeft = 0;//In second
 	$: formatedHour = String(Math.floor(secondLeft / 3600)).padStart(2, '0');
 	$: formatedMinute = String(Math.floor(secondLeft % 3600 / 60)).padStart(2, '0');
 	$: formatedSecond = String(Math.floor(secondLeft % 60)).padStart(2, '0');
@@ -14,8 +14,12 @@
 		secondLeft --;
 	}
 	function syncTypedTime() {
-		secondLeft = parseInt(formatedMinute) * 60 + parseInt(formatedSecond);
-		console.log(secondLeft);
+		if (typeof formatedHour == "number" && typeof formatedMinute == "number" && typeof formatedSecond == "number") {
+			secondLeft = parseInt(formatedHour) * 3600 + parseInt(formatedMinute) * 60 + parseInt(formatedSecond);	
+		}
+		else {
+			secondLeft = secondLeft + 0;//Not working, we need to reassign the formated number when input is not correct
+		}
 	}
 	function alertTimeUp() {
 		alert("Time Up");
@@ -95,5 +99,9 @@
 	}
 	input:focus {
 		outline: none;
+	}
+	.time-container:focus-within  input:not(:focus) {
+		opacity: .4;
+		transition: 200ms;
 	}
 </style>
