@@ -14,15 +14,24 @@
 	function countDown() {
 		secondLeft --;
 	}
+	function timeUp() {
+		alert("Time Up");
+	}
 	setInterval(() => {
 		if (isCounting) {
 			countDown();
+			if (secondLeft <= 0) {
+				timeUp();
+				isCounting = false;
+			}
 		}
 	}, 1000);
 </script>
 
 <main>
 	<h1 id="time">{formatedTime}</h1>
+	<button on:click={() => setTime(3600)}>+1h</button>
+	<button on:click={() => setTime(-3600)}>-1h</button>
 	<button on:click={() => setTime(60)}>+1m</button>
 	<button on:click={() => setTime(-60)}>-1m</button>
 	<button on:click={() => setTime(1)}>+1s</button>
