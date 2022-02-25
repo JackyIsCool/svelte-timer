@@ -74,34 +74,35 @@
 	.button-container {
 		display: flex;
 		justify-content: space-evenly;
-	}
-	button {
-		border: none;
-		height: 50px;
-		width: 50px;
-	}
-	.time-text {
-		font-size: 10rem;
-		padding: 0;
-		margin: 0;
-		text-align: center;
+		button {
+			border: none;
+			height: 50px;
+			width: 50px;
+		}
 	}
 	.time-container {
 		display: flex;
 		justify-content: center;
+		.time-text {
+			font-size: 10rem;
+			padding: 0;
+			margin: 0;
+			text-align: center;
+		}
+		&:focus-within input:not(:focus) {
+			opacity: .4;
+		transition: 200ms;
+		}
 	}
 	input {
 		width: 20%;
 		display: inline-block;
 		border: none;
+		&:focus {
+			outline: none;
+		}
 	}
-	input:focus {
-		outline: none;
-	}
-	.time-container:focus-within  input:not(:focus) {
-		opacity: .4;
-		transition: 200ms;
-	}
+	
 	/* Disable the up and down button when hovering on the input box */
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
