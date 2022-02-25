@@ -1,27 +1,29 @@
 <script>
-	let secondLeft = 0;//In second
-	$: formatedSecond = String(Math.floor(secondLeft / 60)).padStart(2, '0');
-	$: formatedMinute = String(Math.floor(secondLeft % 60)).padStart(2, '0');
-	$: formatedTime = formatedSecond + ":" + formatedMinute;
+	$: secondLeft = 0;//In second
+	$: formatedMinute = String(Math.floor(secondLeft / 60)).padStart(2, '0');
+	$: formatedSecond = String(Math.floor(secondLeft % 60)).padStart(2, '0');
 	let isCounting = false;
 	function toggleOnOff() {
 		isCounting = !isCounting
 	}
 	function addTime(time) {
 		secondLeft += time;
-		console.log(formatedTime);
 	}
 	function countDown() {
 		secondLeft --;
 	}
-	function timeUp() {
+	function syncTypedTime() {
+		secondLeft = parseInt(formatedMinute) * 60 + parseInt(formatedSecond);
+		console.log(secondLeft);
+	}
+	function alertTimeUp() {
 		alert("Time Up");
 	}
 	setInterval(() => {
 		if (isCounting) {
 			countDown();
 			if (secondLeft <= 0) {
-				timeUp();
+				alertTimeUp();
 				isCounting = false;
 			}
 		}
@@ -29,13 +31,24 @@
 </script>
 
 <main>
-	<h1 id="time">{formatedTime}</h1>
-	<button on:click={() => addTime(3600)}>+1h</button>
-	<button on:click={() => addTime(-3600)}>-1h</button>
-	<button on:click={() => addTime(60)}>+1m</button>
-	<button on:click={() => addTime(-60)}>-1m</button>
-	<button on:click={() => addTime(1)}>+1s</button>
-	<button on:click={() => addTime(-1)}>-1s</button>
+	<section>
+		<div class="button-container">
+			<button on:click={() => addTime(3600)}>+1h</button>
+			<button on:click={() => addTime(60)}>+1m</button>
+			<button on:click={() => addTime(1)}>+1s</button>
+		</div>
+		<div class="time-container">
+			<input on:blur={syncTypedTime} bind:value={formatedMinute} id="time"/>
+			<h1>:</h1>
+			<input on:blur={syncTypedTime} bind:value={formatedSecond} id="time"/>
+		</div>
+
+		<div class="button-container">
+			<button on:click={() => addTime(-3600)}>-1h</button>
+			<button on:click={() => addTime(-60)}>-1m</button>
+			<button on:click={() => addTime(-1)}>-1s</button>
+		</div>
+	</section>
 	<button on:click={toggleOnOff}>
 		{#if isCounting}
 			Pause
@@ -49,8 +62,38 @@
 	main {
 		text-align: center;
 	}
+	section {
+		padding-top: 10vh;
+	}
 	#time {
 		text-align: center;
 		font-size: 10rem;
+		margin: 0;
 	}
+	.button-container {
+		display: flex;
+		justify-content: center;
+	}
+	button {
+		border: none;
+		height: 50px;
+		width: 50px;
+	}
+	h1 {
+		font-size: 10rem;
+	}
+	.time-container {
+		display: flex;
+		justify-content: center;
+	}
+	input {
+		width: 30%;
+		text-align: center;
+		display: inline-block;
+		border: none;
+	}
+	input:focus {
+		outline: none;
+	}
+	
 </style>
