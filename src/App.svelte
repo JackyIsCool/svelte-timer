@@ -63,6 +63,7 @@
 
 <style>
 	main {
+		font-family: Arial, Helvetica, sans-serif;
 		text-align: center;
 	}
 	section {
@@ -80,19 +81,19 @@
 	.time-text {
 		font-size: 10rem;
 		padding: 0;
+		margin: 0;
+		text-align: center;
 	}
 	.time-container {
 		display: flex;
 		justify-content: center;
 	}
 	input {
-		width: 30%;
-		text-align: center;
+		width: 20%;
 		display: inline-block;
 		border: none;
 	}
 	input:focus {
 		outline: none;
 	}
-	
 </style>
