@@ -7,7 +7,7 @@
 	function toggleOnOff() {
 		isCounting = !isCounting
 	}
-	function setTime(time) {
+	function addTime(time) {
 		secondLeft += time;
 		console.log(formatedTime);
 	}
@@ -30,12 +30,12 @@
 
 <main>
 	<h1 id="time">{formatedTime}</h1>
-	<button on:click={() => setTime(3600)}>+1h</button>
-	<button on:click={() => setTime(-3600)}>-1h</button>
-	<button on:click={() => setTime(60)}>+1m</button>
-	<button on:click={() => setTime(-60)}>-1m</button>
-	<button on:click={() => setTime(1)}>+1s</button>
-	<button on:click={() => setTime(-1)}>-1s</button>
+	<button on:click={() => addTime(3600)}>+1h</button>
+	<button on:click={() => addTime(-3600)}>-1h</button>
+	<button on:click={() => addTime(60)}>+1m</button>
+	<button on:click={() => addTime(-60)}>-1m</button>
+	<button on:click={() => addTime(1)}>+1s</button>
+	<button on:click={() => addTime(-1)}>-1s</button>
 	<button on:click={toggleOnOff}>
 		{#if isCounting}
 			Pause
