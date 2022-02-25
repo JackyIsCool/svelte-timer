@@ -8,3 +8,4 @@
 + timer
 + current time
 + Styling
++ Use Electron to turn this into a desktop app with more function
