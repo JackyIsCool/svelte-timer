@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	let secondLeft = 0;//In second
 	$: formatedHour = String(Math.floor(secondLeft / 3600)).padStart(2, '0');
 	$: formatedMinute = String(Math.floor(secondLeft % 3600 / 60)).padStart(2, '0');
@@ -7,7 +7,7 @@
 	function toggleOnOff() {
 		isCounting = !isCounting
 	}
-	function addTime(time) {
+	function addTime(time:number) {
 		secondLeft += time;
 	}
 	function countDown() {
