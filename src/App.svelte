@@ -1,6 +1,7 @@
 <script>
 	$: secondLeft = 0;//In second
-	$: formatedMinute = String(Math.floor(secondLeft / 60)).padStart(2, '0');
+	$: formatedHour = String(Math.floor(secondLeft / 3600)).padStart(2, '0');
+	$: formatedMinute = String(Math.floor(secondLeft % 3600 / 60)).padStart(2, '0');
 	$: formatedSecond = String(Math.floor(secondLeft % 60)).padStart(2, '0');
 	let isCounting = false;
 	function toggleOnOff() {
@@ -38,6 +39,8 @@
 			<button on:click={() => addTime(1)}>+1s</button>
 		</div>
 		<div class="time-container">
+			<input on:blur={syncTypedTime} bind:value={formatedHour} class="time-text"/>
+			<div class="time-text">:</div>
 			<input on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text"/>
 			<div class="time-text">:</div>
 			<input on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text"/>
