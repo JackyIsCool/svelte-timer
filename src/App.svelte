@@ -38,9 +38,9 @@
 			<button on:click={() => addTime(1)}>+1s</button>
 		</div>
 		<div class="time-container">
-			<input on:blur={syncTypedTime} bind:value={formatedMinute} id="time"/>
-			<h1>:</h1>
-			<input on:blur={syncTypedTime} bind:value={formatedSecond} id="time"/>
+			<input on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text"/>
+			<div class="time-text">:</div>
+			<input on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text"/>
 		</div>
 
 		<div class="button-container">
@@ -65,11 +65,6 @@
 	section {
 		padding-top: 10vh;
 	}
-	#time {
-		text-align: center;
-		font-size: 10rem;
-		margin: 0;
-	}
 	.button-container {
 		display: flex;
 		justify-content: center;
@@ -79,8 +74,9 @@
 		height: 50px;
 		width: 50px;
 	}
-	h1 {
+	.time-text {
 		font-size: 10rem;
+		padding: 0;
 	}
 	.time-container {
 		display: flex;
