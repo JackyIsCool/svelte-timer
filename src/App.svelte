@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Clock from "./Clock.svelte";
+	import SwitchButton from "./SwitchButton.svelte";
 	let secondLeft: number = 0;//In second
 	let isCounting = false;
 	
@@ -31,6 +32,7 @@
 </script>
 
 <main>
+	<SwitchButton/>
 	<section>
 		<div class="button-container">
 			<button on:click={() => addTime(3600)}>👆</button>
@@ -70,6 +72,4 @@
 			width: 50px;
 		}
 	}
-	
-	
 </style>
