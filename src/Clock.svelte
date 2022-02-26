@@ -30,7 +30,7 @@
 		display: flex;
 		justify-content: center;
 		.time-text {
-			font-size: 10rem;
+			font-size: 12vw;
 			padding: 0;
 			margin: 0;
 			text-align: center;
