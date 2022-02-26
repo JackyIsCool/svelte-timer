@@ -1,20 +1,29 @@
 <script lang="ts">
-	let secondLeft = 0;//In second
+	let secondLeft: number = 0;//In second
 	$: formatedHour = String(Math.floor(secondLeft / 3600)).padStart(2, '0');
 	$: formatedMinute = String(Math.floor(secondLeft % 3600 / 60)).padStart(2, '0');
 	$: formatedSecond = String(Math.floor(secondLeft % 60)).padStart(2, '0');
 	let isCounting = false;
+	
 	function toggleOnOff() {
 		isCounting = !isCounting
 	}
 	function addTime(time:number) {
-		secondLeft += time;
+		let endResult: number = secondLeft + time;
+		secondLeft = endResult >= 0 ? endResult : 0; // Prevent time less than 0
+	}
+	function syncTypedTime() {
+		let endResult: number = parseInt(formatedHour) * 3600 + parseInt(formatedMinute) * 60 + parseInt(formatedSecond);
+		secondLeft = endResult >= 0 ? endResult : 0; // Prevent time less than 0
+		updateFormatedTime();
+	}
+	function updateFormatedTime() {
+		formatedHour = String(Math.floor(secondLeft / 3600)).padStart(2, '0');
+		formatedMinute = String(Math.floor(secondLeft % 3600 / 60)).padStart(2, '0');
+		formatedSecond = String(Math.floor(secondLeft % 60)).padStart(2, '0');
 	}
 	function countDown() {
 		secondLeft --;
-	}
-	function syncTypedTime() {
-		secondLeft = parseInt(formatedHour) * 3600 + parseInt(formatedMinute) * 60 + parseInt(formatedSecond);
 	}
 	function alertTimeUp() {
 		alert("Time Up");
