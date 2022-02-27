@@ -45,6 +45,7 @@
 			<button on:click={() => addTime(1)}>👆</button>
 		</div>
 	{/if}
+	<!--TODO: make the second not bind to second left, so it can import different data between timer, time, and countdown without messing up-->
 		<Clock bind:second={secondLeft} disabled={currentState != ClockState.countdown}/>
 	{#if currentState == ClockState.countdown}
 		<div class="button-container">
