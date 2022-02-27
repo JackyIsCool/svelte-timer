@@ -2,7 +2,9 @@
 	import Clock from "./Clock.svelte";
 	import SwitchButton from "./SwitchButton.svelte";
 	import { ClockState } from "./ClockState";
+	let date = new Date();
 	let secondLeft: number = 0;//In second
+	let secondSinceMorning: number;
 	let isCounting: boolean = false;
 	let currentState: ClockState = ClockState.countdown;
 	
@@ -29,7 +31,7 @@
 		}
 	}, 1000);
 	setInterval(() => {
-		console.log(currentState)
+		secondSinceMorning = date.getSeconds();
 	});
 </script>
 
@@ -43,7 +45,7 @@
 			<button on:click={() => addTime(1)}>👆</button>
 		</div>
 	{/if}
-		<Clock bind:second={secondLeft}/>
+		<Clock bind:second={secondLeft} disabled={currentState != ClockState.countdown}/>
 	{#if currentState == ClockState.countdown}
 		<div class="button-container">
 			<button on:click={() => addTime(-3600)}>👇</button>

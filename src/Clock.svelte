@@ -1,5 +1,6 @@
 <script lang="ts">
     export let second: number;
+	export let disabled: boolean = true;
 	$: formatedHour = String(Math.floor(second / 3600)).padStart(2, '0');
 	$: formatedMinute = String(Math.floor(second % 3600 / 60)).padStart(2, '0');
 	$: formatedSecond = String(Math.floor(second % 60)).padStart(2, '0');
@@ -21,11 +22,11 @@
 </script>
 <main>
     <form class="time-container">
-        <input type="number" on:blur={syncTypedTime} bind:value={formatedHour} class="time-text"/>
+        <input type="number" on:blur={syncTypedTime} bind:value={formatedHour} class="time-text" disabled={disabled}/>
         <div class="time-text">:</div>
-        <input type="number" on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text"/>
+        <input type="number" on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text" disabled={disabled} />
         <div class="time-text">:</div>
-        <input type="number" on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text"/>
+        <input type="number" on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text" disabled={disabled}/>
     </form>
 </main>
 <style lang="scss">
@@ -40,7 +41,7 @@
 		}
 		&:focus-within input:not(:focus) {
 			opacity: .4;
-		transition: 200ms;
+			transition: 200ms;
 		}
 	}
     input {
@@ -49,6 +50,9 @@
 		border: none;
 		&:focus {
 			outline: none;
+		}
+		&:disabled {
+			color: currentColor;
 		}
 	}
 	/* Disable the up and down button when hovering on the input box */
