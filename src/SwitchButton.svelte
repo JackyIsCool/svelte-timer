@@ -1,14 +1,9 @@
 <script lang="ts">
     import { mousePosition, windowSize } from "./mousePosition";
-    import { fly } from 'svelte/transition';
-	enum ClockState {
-		countdown,
-		time,
-		timer
-	}
-	let state: ClockState;
+	import { ClockState } from "./ClockState";
+	export let currentState: ClockState;
     class Button {
-        constructor(toX: number, toY: number, toState: ClockState, ) {
+        constructor(toX: number, toY: number, toState: ClockState) {
             this.toX = toX;
             this.toY = toY;
             this.toState = toState;
@@ -19,8 +14,8 @@
     }
     const buttons:Button[] = [
         new Button(0, -80, ClockState.countdown),
-        new Button(-60, -60, ClockState.countdown),
-        new Button(-80, 0, ClockState.countdown)
+        new Button(-60, -60, ClockState.time),
+        new Button(-80, 0, ClockState.timer)
     ];
     let isPin:boolean = false;
     let isCloseTo = false;
@@ -29,19 +24,19 @@
         if((windowSize.x - mousePosition.x) > 200 && (windowSize.y - mousePosition.y) > 200) {
             isCloseTo = false;
         }
-        console.log(isPin || isCloseTo);
     });
 </script>
 <main>
     <div class="button-container">
         <span id="menu-button" 
             class:active={active}
-            on:click={() => isPin = !isPin} 
+            on:click|self={() => isPin = !isPin} 
             on:mouseenter={() => isCloseTo = true}
         >
             {#each buttons as button}
                 <span class="sub-button" 
                     style="--x: {button.toX}px; --y: {button.toY}px"
+                    on:click={() => currentState = button.toState}
                 >    
                 </span>
             {/each}

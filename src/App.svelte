@@ -1,8 +1,10 @@
 <script lang="ts">
 	import Clock from "./Clock.svelte";
 	import SwitchButton from "./SwitchButton.svelte";
+	import { ClockState } from "./ClockState";
 	let secondLeft: number = 0;//In second
 	let isCounting: boolean = false;
+	let currentState: ClockState = ClockState.countdown;
 	
 	function toggleOnOff() {
 		isCounting = !isCounting
@@ -26,13 +28,13 @@
 			}
 		}
 	}, 1000);
-	// setInterval(() => {
-	// 	console.log(secondLeft);
-	// }, 10)
+	setInterval(() => {
+		console.log(currentState)
+	});
 </script>
 
 <main>
-	<SwitchButton/>
+	<SwitchButton bind:currentState/> 
 	<section>
 		<div class="button-container">
 			<button on:click={() => addTime(3600)}>👆</button>
