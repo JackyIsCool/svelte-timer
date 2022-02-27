@@ -2,7 +2,7 @@
 	import Clock from "./Clock.svelte";
 	import SwitchButton from "./SwitchButton.svelte";
 	let secondLeft: number = 0;//In second
-	let isCounting = false;
+	let isCounting: boolean = false;
 	
 	function toggleOnOff() {
 		isCounting = !isCounting
@@ -26,9 +26,9 @@
 			}
 		}
 	}, 1000);
-	setInterval(() => {
-		console.log(secondLeft);
-	}, 10)
+	// setInterval(() => {
+	// 	console.log(secondLeft);
+	// }, 10)
 </script>
 
 <main>
@@ -39,7 +39,7 @@
 			<button on:click={() => addTime(60)}>👆</button>
 			<button on:click={() => addTime(1)}>👆</button>
 		</div>
-		<Clock second={secondLeft}/>
+		<Clock bind:second={secondLeft}/>
 		<div class="button-container">
 			<button on:click={() => addTime(-3600)}>👇</button>
 			<button on:click={() => addTime(-60)}>👇</button>
