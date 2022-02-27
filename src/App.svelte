@@ -36,17 +36,21 @@
 <main>
 	<SwitchButton bind:currentState/> 
 	<section>
+	{#if currentState == ClockState.countdown}		
 		<div class="button-container">
 			<button on:click={() => addTime(3600)}>👆</button>
 			<button on:click={() => addTime(60)}>👆</button>
 			<button on:click={() => addTime(1)}>👆</button>
 		</div>
+	{/if}
 		<Clock bind:second={secondLeft}/>
+	{#if currentState == ClockState.countdown}
 		<div class="button-container">
 			<button on:click={() => addTime(-3600)}>👇</button>
 			<button on:click={() => addTime(-60)}>👇</button>
 			<button on:click={() => addTime(-1)}>👇</button>
 		</div>
+	{/if}
 	</section>
 	<button on:click={toggleOnOff}>
 		{#if isCounting}
