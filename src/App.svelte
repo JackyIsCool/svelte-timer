@@ -23,7 +23,10 @@
 	}
 	setInterval(() => {
 		if (isCounting) {
-			countDown();
+			if (secondLeft > 0) {
+				countDown();	
+			} 
+			//Detect if secondLeft meet 0 after countDown()
 			if (secondLeft <= 0) {
 				alertTimeUp();
 				isCounting = false;
