@@ -2,7 +2,6 @@
 	import Clock from "./Clock.svelte";
 	import SwitchButton from "./SwitchButton.svelte";
 	import { ClockState } from "./ClockState";
-	let date:Date;
 	export let secondLeft: number = 0;//In second
 	let secondSinceMorning: number;
 	let isCounting: boolean = false;
@@ -34,7 +33,7 @@
 		}
 	}, 1000);
 	setInterval(() => {
-		date = new Date();
+		const date = new Date();
 		const timeInSecond = date.getTime() / 1000;
 		const timeZoneOffsetSecond = date.getTimezoneOffset() * 60;
 		secondSinceMorning = Math.floor((timeInSecond - timeZoneOffsetSecond) % 86400);
