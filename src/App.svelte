@@ -2,8 +2,8 @@
 	import Clock from "./Clock.svelte";
 	import SwitchButton from "./SwitchButton.svelte";
 	import { ClockState } from "./ClockState";
-	let date = new Date();
-	let secondLeft: number = 0;//In second
+	let date:Date;
+	export let secondLeft: number = 0;//In second
 	let secondSinceMorning: number;
 	let isCounting: boolean = false;
 	let currentState: ClockState = ClockState.countdown;
@@ -34,7 +34,10 @@
 		}
 	}, 1000);
 	setInterval(() => {
-		secondSinceMorning = date.getSeconds();
+		date = new Date();
+		const timeInSecond = date.getTime() / 1000;
+		const timeZoneOffsetSecond = date.getTimezoneOffset() * 60;
+		secondSinceMorning = Math.floor((timeInSecond - timeZoneOffsetSecond) % 86400);
 	});
 </script>
 
@@ -49,7 +52,13 @@
 		</div>
 	{/if}
 	<!--TODO: make the second not bind to second left, so it can import different data between timer, time, and countdown without messing up-->
-		<Clock bind:second={secondLeft} disabled={currentState != ClockState.countdown}/>
+	{#if currentState == ClockState.countdown}
+		<Clock bind:second={secondLeft} disabled={false}/>
+	{:else if currentState == ClockState.time}
+		<Clock second={secondSinceMorning} />
+	{:else if currentState == ClockState.timer}
+		<Clock bind:second={secondLeft} />
+	{/if}
 	{#if currentState == ClockState.countdown}
 		<div class="button-container">
 			<button on:click={() => addTime(-3600)}>👇</button>
@@ -57,14 +66,17 @@
 			<button on:click={() => addTime(-1)}>👇</button>
 		</div>
 	{/if}
+	{#if currentState == ClockState.countdown || currentState == ClockState.timer}
+		<button on:click={toggleOnOff}>
+			{#if isCounting}
+				Pause
+			{:else}
+				Start
+			{/if}
+		</button>
+	{/if}
 	</section>
-	<button on:click={toggleOnOff}>
-		{#if isCounting}
-			Pause
-		{:else}
-			Start
-		{/if}
-	</button>
+	
 </main>
 
 <style lang="scss">
