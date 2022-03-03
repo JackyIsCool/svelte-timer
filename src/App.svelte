@@ -2,14 +2,14 @@
 	import Clock from "./Clock.svelte";
 	import SwitchButton from "./SwitchButton.svelte";
 	import { ClockState } from "./ClockState";
+	import ToggleButton from "./ToggleButton.svelte";
 	export let secondLeft: number = 0;//In second
 	let secondSinceMorning: number;
-	let isCounting: boolean = false;
+	let isCountingDown: boolean = false;
+	let isCountingUp: boolean = false;
 	let currentState: ClockState = ClockState.countdown;
 	
-	function toggleOnOff() {
-		isCounting = !isCounting
-	}
+	
 	function addTime(time:number) {
 		let endResult: number = secondLeft + time;
 		secondLeft = endResult >= 0 ? endResult : 0; // Prevent time less than 0
@@ -21,14 +21,14 @@
 		alert("Time Up");
 	}
 	setInterval(() => {
-		if (isCounting) {
+		if (isCountingDown) {
 			if (secondLeft > 0) {
 				countDown();	
 			} 
 			//Detect if secondLeft meet 0 after countDown()
 			if (secondLeft <= 0) {
 				alertTimeUp();
-				isCounting = false;
+				isCountingDown = false;
 			}
 		}
 	}, 1000);
@@ -55,20 +55,12 @@
 			<button on:click={() => addTime(-60)}>👇</button>
 			<button on:click={() => addTime(-1)}>👇</button>
 		</div>
+		<ToggleButton bind:value={isCountingDown}/>
 	{:else if currentState == ClockState.time}
 		<Clock second={secondSinceMorning} />
 	{:else if currentState == ClockState.timer}
 		<Clock bind:second={secondLeft} />
-	{/if}
-		
-	{#if currentState == ClockState.countdown || currentState == ClockState.timer}
-		<button on:click={toggleOnOff}>
-			{#if isCounting}
-				Pause
-			{:else}
-				Start
-			{/if}
-		</button>
+		<ToggleButton bind:value={isCountingUp}/>
 	{/if}
 	</section>
 	
