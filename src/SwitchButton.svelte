@@ -35,6 +35,7 @@
             on:click|self={() => isPin = !isPin} 
             on:mouseenter={() => isCloseTo = true}
         >
+            <!-- TODO: pin animation when clicked -->
             <img src="img/pin.png" alt="">
             {#each buttons as button}
                 <span class="sub-button" 

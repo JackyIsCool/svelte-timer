@@ -5,6 +5,7 @@
 	import ToggleButton from "./ToggleButton.svelte";
 	export let secondLeft: number = 0;//In second
 	let secondSinceMorning: number;
+	let secondPassed: number = 0;
 	let isCountingDown: boolean = false;
 	let isCountingUp: boolean = false;
 	let currentState: ClockState = ClockState.countdown;
@@ -16,6 +17,9 @@
 	}
 	function countDown() {
 		secondLeft --;
+	}
+	function countUp() {
+		secondPassed ++;
 	}
 	function alertTimeUp() {
 		alert("Time Up");
@@ -30,6 +34,9 @@
 				alertTimeUp();
 				isCountingDown = false;
 			}
+		}
+		if (isCountingUp) {
+			countUp();
 		}
 	}, 1000);
 	setInterval(() => {
@@ -59,7 +66,7 @@
 	{:else if currentState == ClockState.time}
 		<Clock second={secondSinceMorning} />
 	{:else if currentState == ClockState.timer}
-		<Clock bind:second={secondLeft} />
+		<Clock second={secondPassed} />
 		<ToggleButton bind:value={isCountingUp}/>
 	{/if}
 	</section>
