@@ -4,8 +4,9 @@
 - [X] Alert when time is up
 - [X] Edit time with buttons
 - [X] Edit time by select and type numbers
+- [X] Countdown
+- [X] Timer
+- [X] Current time
 ## Todo:
-- [ ] timer
-- [ ] current time
 - [ ] Styling
 - [ ] Use Electron to turn this into a desktop app with more function
