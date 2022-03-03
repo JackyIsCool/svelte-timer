@@ -23,7 +23,7 @@
     let isCloseTo = false;
     $: active = isPin || isCloseTo;
     setInterval(() => {
-        if((windowSize.x - mousePosition.x) > 200 && (windowSize.y - mousePosition.y) > 200) {
+        if((windowSize.x - mousePosition.x) > 150 && (windowSize.y - mousePosition.y) > 150) {
             isCloseTo = false;
         }
     });
@@ -55,19 +55,10 @@
     }
     span {
         display: block;
-    }
-    #menu-button {
-        position: relative;
-        $diameter: 50px;
-        background-color: red;
-        height: $diameter;
-        width: $diameter;
-        border-radius: 100%;
-        transform-style: preserve-3d;
-        &.active {
-            .sub-button {
-                transform: translateX(var(--x)) translateY(var(--y));
-            }
+        background-color: white;
+        box-shadow: 1px 1px 3px black;
+        &:active {
+            box-shadow: inset 1px 1px 3px black;
         }
         img {
             top: 0;
@@ -79,7 +70,24 @@
             width: 75%;
             
             pointer-events: none;
+            user-select: none;
+            filter: brightness(0);
         }
+    }
+    #menu-button {
+        position: relative;
+        $diameter: 50px;
+        height: $diameter;
+        width: $diameter;
+        
+        border-radius: 100%;
+        transform-style: preserve-3d;
+        &.active {
+            .sub-button {
+                transform: translateX(var(--x)) translateY(var(--y));
+            }
+        }
+        
     }
     .sub-button {
         position: absolute;
@@ -87,7 +95,7 @@
         height: $diameter;
         width: $diameter;
         border-radius: 100%;
-        background-color: blue;
+        background-color: white;
         transform: translateZ(-10px);
         transition: 300ms;
     }
