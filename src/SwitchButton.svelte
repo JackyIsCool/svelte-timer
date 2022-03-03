@@ -3,19 +3,21 @@
 	import { ClockState } from "./ClockState";
 	export let currentState: ClockState;
     class Button {
-        constructor(toX: number, toY: number, toState: ClockState) {
+        constructor(toX: number, toY: number, toState: ClockState, imageURL:string) {
             this.toX = toX;
             this.toY = toY;
             this.toState = toState;
+            this.imageURL = imageURL;
         }
         toX: number;
         toY: number;
         toState: ClockState;
+        imageURL;
     }
     const buttons:Button[] = [
-        new Button(0, -80, ClockState.countdown),
-        new Button(-60, -60, ClockState.time),
-        new Button(-80, 0, ClockState.timer)
+        new Button(0, -80, ClockState.countdown, "img/countdown.png"),
+        new Button(-60, -60, ClockState.time, "img/time.png"),
+        new Button(-80, 0, ClockState.timer, "img/timer.png")
     ];
     let isPin:boolean = false;
     let isCloseTo = false;
@@ -33,11 +35,13 @@
             on:click|self={() => isPin = !isPin} 
             on:mouseenter={() => isCloseTo = true}
         >
+            <img src="img/pin.png" alt="">
             {#each buttons as button}
                 <span class="sub-button" 
                     style="--x: {button.toX}px; --y: {button.toY}px"
                     on:click={() => currentState = button.toState}
                 >    
+                    <img src={button.imageURL} alt="">
                 </span>
             {/each}
         </span>
@@ -59,12 +63,22 @@
         height: $diameter;
         width: $diameter;
         border-radius: 100%;
-        z-index: 1;
         transform-style: preserve-3d;
         &.active {
             .sub-button {
                 transform: translateX(var(--x)) translateY(var(--y));
             }
+        }
+        img {
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 75%;
+            
+            pointer-events: none;
         }
     }
     .sub-button {
@@ -75,6 +89,6 @@
         border-radius: 100%;
         background-color: blue;
         transform: translateZ(-10px);
-                transition: 300ms;
+        transition: 300ms;
     }
 </style>
