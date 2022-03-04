@@ -7,9 +7,9 @@
 <main>
     <button on:click={toggleOnOff} class="shadow-button">
         {#if value}
-            Pause
+            ⏸
         {:else}
-            Start
+            ▶️
         {/if}
     </button>
     

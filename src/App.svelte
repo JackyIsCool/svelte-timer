@@ -79,7 +79,10 @@
 		text-align: center;
 	}
 	section {
-		padding-top: 10vh;
+		position: absolute;
+		margin: 0;
+  		top: 50%;
+		transform: translateY(-50%);
 	}
 	.button-container {
 		display: flex;
