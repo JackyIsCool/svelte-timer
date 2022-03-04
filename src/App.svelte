@@ -52,15 +52,15 @@
 	<section>
 	{#if currentState == ClockState.countdown}		
 		<div class="button-container">
-			<button on:click={() => addTime(3600)}>👆</button>
-			<button on:click={() => addTime(60)}>👆</button>
-			<button on:click={() => addTime(1)}>👆</button>
+		{#each [3600, 60, 1] as value}
+			<button on:click={() => addTime(value)} class="shadow-button">👆</button>
+		{/each}
 		</div>
 		<Clock bind:second={secondLeft} disabled={false}/>
 		<div class="button-container">
-			<button on:click={() => addTime(-3600)}>👇</button>
-			<button on:click={() => addTime(-60)}>👇</button>
-			<button on:click={() => addTime(-1)}>👇</button>
+		{#each [-3600, -60, -1] as value}
+			<button on:click={() => addTime(value)} class="shadow-button">👇</button>
+		{/each}
 		</div>
 		<ToggleButton bind:value={isCountingDown}/>
 	{:else if currentState == ClockState.time}
@@ -89,5 +89,11 @@
 			height: 50px;
 			width: 50px;
 		}
+	}
+	:global(.shadow-button) {
+        box-shadow: 1px 1px 3px black;
+        &:active {
+            box-shadow: inset 1px 1px 3px black;
+        }
 	}
 </style>

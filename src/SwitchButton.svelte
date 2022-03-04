@@ -30,7 +30,7 @@
 </script>
 <main>
     <div class="button-container">
-        <span id="menu-button" 
+        <span id="menu-button" class="shadow-button"
             class:active={active}
             on:click|self={() => isPin = !isPin} 
             on:mouseenter={() => isCloseTo = true}
@@ -38,7 +38,7 @@
             <!-- TODO: pin animation when clicked -->
             <img src="img/pin.png" alt="">
             {#each buttons as button}
-                <span class="sub-button" 
+                <span class="sub-button shadow-button" 
                     style="--x: {button.toX}px; --y: {button.toY}px"
                     on:click={() => currentState = button.toState}
                 >    
@@ -57,10 +57,6 @@
     span {
         display: block;
         background-color: white;
-        box-shadow: 1px 1px 3px black;
-        &:active {
-            box-shadow: inset 1px 1px 3px black;
-        }
         img {
             top: 0;
             bottom: 0;

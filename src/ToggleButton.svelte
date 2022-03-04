@@ -5,7 +5,7 @@
 	}
 </script>
 <main>
-    <button on:click={toggleOnOff}>
+    <button on:click={toggleOnOff} class="shadow-button">
         {#if value}
             Pause
         {:else}
