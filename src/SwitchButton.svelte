@@ -32,31 +32,37 @@
     <div class="button-container">
         <span id="menu-button" class="shadow-button"
             class:active={active}
+            class:blue-bg={isPin}
             on:click|self={() => isPin = !isPin} 
             on:mouseenter={() => isCloseTo = true}
+            
         >
             <!-- TODO: pin animation when clicked -->
             <img src="img/pin.png" alt="">
-            {#each buttons as button}
-                <span class="sub-button shadow-button" 
-                    style="--x: {button.toX}px; --y: {button.toY}px"
-                    on:click={() => currentState = button.toState}
-                >    
-                    <img src={button.imageURL} alt="">
-                </span>
-            {/each}
         </span>
+    {#each buttons as button}
+        <span 
+            class="sub-button shadow-button" 
+            class:blue-bg={currentState == button.toState}
+            style="--x: {button.toX}px; --y: {button.toY}px"
+            on:click={() => currentState = button.toState}
+        >    
+            <img src={button.imageURL} alt="">
+        </span>
+    {/each}
     </div>
 </main>
 <style lang="scss">
     .button-container {
-        position: absolute;
-        bottom: 5vh;
-        right: 5vh;
+        position: fixed ;
+        display: flex;
+        bottom: 10vh;
+        right: 10vh;
     }
     span {
         display: block;
         background-color: white;
+        position: absolute;
         img {
             top: 0;
             bottom: 0;
@@ -72,28 +78,27 @@
         }
     }
     #menu-button {
-        position: relative;
         $diameter: 50px;
         height: $diameter;
         width: $diameter;
-        
         border-radius: 100%;
         transform-style: preserve-3d;
+        z-index: 1;
         &.active {
-            .sub-button {
+            ~.sub-button {
                 transform: translateX(var(--x)) translateY(var(--y));
             }
         }
-        
     }
     .sub-button {
-        position: absolute;
         $diameter: 50px;
         height: $diameter;
         width: $diameter;
         border-radius: 100%;
         background-color: white;
-        transform: translateZ(-10px);
         transition: 300ms;
+    }
+    .blue-bg {
+        background-color: #74b9ff;
     }
 </style>

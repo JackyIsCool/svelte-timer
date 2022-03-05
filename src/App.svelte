@@ -95,6 +95,7 @@
 	}
 	:global(.shadow-button) {
         box-shadow: 1px 1px 3px black;
+		cursor: pointer;
         &:active {
             box-shadow: inset 1px 1px 3px black;
         }
