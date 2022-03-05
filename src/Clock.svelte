@@ -51,10 +51,6 @@
 		&:focus {
 			outline: none;
 		}
-		&:disabled {
-			color: currentColor;
-			background-color: transparent;
-		}
 	}
 	/* Disable the up and down button when hovering on the input box */
 	input::-webkit-outer-spin-button,
