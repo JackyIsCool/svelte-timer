@@ -56,7 +56,7 @@
 			<button on:click={() => addTime(value)} class="shadow-button">👆</button>
 		{/each}
 		</div>
-		<Clock bind:second={secondLeft} disabled={false}/>
+		<Clock bind:second={secondLeft} readonly={false}/>
 		<div class="button-container">
 		{#each [-3600, -60, -1] as value}
 			<button on:click={() => addTime(value)} class="shadow-button">👇</button>

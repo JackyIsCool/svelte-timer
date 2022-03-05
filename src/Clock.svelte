@@ -1,6 +1,6 @@
 <script lang="ts">
     export let second: number;
-	export let disabled: boolean = true;
+	export let readonly: boolean = true;
 	$: formatedHour = String(Math.floor(second / 3600)).padStart(2, '0');
 	$: formatedMinute = String(Math.floor(second % 3600 / 60)).padStart(2, '0');
 	$: formatedSecond = String(Math.floor(second % 60)).padStart(2, '0');
@@ -22,11 +22,11 @@
 </script>
 <main>
     <form class="time-container">
-        <input type="number" on:blur={syncTypedTime} bind:value={formatedHour} class="time-text" disabled={disabled}/>
+        <input type="number" on:blur={syncTypedTime} bind:value={formatedHour} class="time-text" readonly={readonly}/>
         <div class="time-text">:</div>
-        <input type="number" on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text" disabled={disabled} />
+        <input type="number" on:blur={syncTypedTime} bind:value={formatedMinute} class="time-text" readonly={readonly} />
         <div class="time-text">:</div>
-        <input type="number" on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text" disabled={disabled}/>
+        <input type="number" on:blur={syncTypedTime} bind:value={formatedSecond} class="time-text" readonly={readonly}/>
     </form>
 </main>
 <style lang="scss">
