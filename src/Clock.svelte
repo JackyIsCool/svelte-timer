@@ -8,13 +8,6 @@
 	function syncTypedTime() {
 		let endResult: number = parseInt(formatedHour) * 3600 + parseInt(formatedMinute) * 60 + parseInt(formatedSecond);
 		second = endResult >= 0 ? endResult : 0; // Prevent time less than 0
-		updateFormatedTime();
-	}
-    
-	function updateFormatedTime() {
-		formatedHour = String(Math.floor(second / 3600)).padStart(2, '0');
-		formatedMinute = String(Math.floor(second % 3600 / 60)).padStart(2, '0');
-		formatedSecond = String(Math.floor(second % 60)).padStart(2, '0');
 	}
     // setInterval(() => {
     //     console.log(second);
