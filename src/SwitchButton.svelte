@@ -30,12 +30,12 @@
 </script>
 <main>
     <div class="button-container">
-        <span id="menu-button" class="shadow-button"
+        <span id="menu-button" 
+            class="shadow-button"
             class:active={active}
             class:blue-bg={isPin}
             on:click|self={() => isPin = !isPin} 
             on:mouseenter={() => isCloseTo = true}
-            
         >
             <!-- TODO: pin animation when clicked -->
             <img src="img/pin.png" alt="">
@@ -101,6 +101,6 @@
         transition: 300ms;
     }
     .blue-bg {
-        background-color: #74b9ff;
+        background-color: #74b9ff !important;
     }
 </style>
