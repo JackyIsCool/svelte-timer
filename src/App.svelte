@@ -11,11 +11,6 @@
 	let isCountingUp: boolean = false;
 	let currentState: ClockState = ClockState.countdown;
 	
-	
-	function addTime(time:number) {
-		let endResult: number = secondLeft + time;
-		secondLeft = endResult >= 0 ? endResult : 0; // Prevent time less than 0
-	}
 	function countDown() {
 		secondLeft --;
 	}
@@ -71,32 +66,14 @@
 
 <main>
 	{#if currentState == ClockState.countdown}
-		<div class="center">
-			<div class="button-container">
-			{#each [3600, 60, 1] as value}
-				<button on:click={() => addTime(value)} class="up-down-button pad-0">
-					<img src="img/up_arrow.png" alt="">
-				</button>
-			{/each}
-			</div>
-			<Clock bind:second={secondLeft} readonly={false}/>
-			<div class="button-container">
-			{#each [-3600, -60, -1] as value}
-				<button on:click={() => addTime(value)} class="up-down-button pad-0">
-					<img src="img/down_arrow.png" alt="">
-				</button>
-			{/each}
-			</div>
-		</div>
+		<Clock bind:second={secondLeft} readonly={false}/>
 		<ToggleButton bind:value={isCountingDown}/>
+
 	{:else if currentState == ClockState.time}
-		<div class="center">
-			<Clock second={secondSinceMorning} />
-		</div>
+		<Clock second={secondSinceMorning} />
+
 	{:else if currentState == ClockState.timer}
-		<div class="center">
-			<Clock second={secondPassed} />
-		</div>
+		<Clock second={secondPassed} />
 		<ToggleButton bind:value={isCountingUp}/>
 	{/if}
 	<SwitchButton bind:currentState/> 
@@ -107,40 +84,11 @@
 		font-family: Arial, Helvetica, sans-serif;
 		text-align: center;
 	}
-	.center {
-		position: absolute;
-  		top: 50%;
-		transform: translateY(-50%);
-	}
-	.button-container {
-		display: flex;
-		justify-content: space-evenly;
-		button {
-			@extend :global(.shadow-button);
-			border: none;
-			border-radius: 100%;
-			height: 50px;
-			width: 50px;
-			background-color: var(--second-background-color);
-			img {
-				// Set png icon to white if is in light mode
-				filter: brightness(var(--is-dark-mode));
-			}
-		}
-	}
 	:global(.shadow-button) {
         box-shadow: 1px 1px 3px black;
 		cursor: pointer;
         &:active {
             box-shadow: inset 1px 1px 3px black;
         }
-	}
-	.pad-0 {
-		padding: 0;
-	}
-	.up-down-button {
-		background-color: transparent;
-		cursor: pointer;
-		height: 1000px;
 	}
 </style>
