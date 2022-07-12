@@ -53,13 +53,17 @@
 	{#if currentState == ClockState.countdown}		
 		<div class="button-container">
 		{#each [3600, 60, 1] as value}
-			<button on:click={() => addTime(value)} class="shadow-button">👆</button>
+			<button on:click={() => addTime(value)} class="up-down-button pad-0">
+				<img src="img/up_arrow.png" alt="">
+			</button>
 		{/each}
 		</div>
 		<Clock bind:second={secondLeft} readonly={false}/>
 		<div class="button-container">
 		{#each [-3600, -60, -1] as value}
-			<button on:click={() => addTime(value)} class="shadow-button">👇</button>
+			<button on:click={() => addTime(value)} class="up-down-button pad-0">
+				<img src="img/down_arrow.png" alt="">
+			</button>
 		{/each}
 		</div>
 		<ToggleButton bind:value={isCountingDown}/>
@@ -88,10 +92,18 @@
 		display: flex;
 		justify-content: space-evenly;
 		button {
+			@extend :global(.shadow-button);
 			border: none;
+			border-radius: 50px;
 			height: 50px;
 			width: 50px;
 			background-color: var(--second-background-color);
+			img {
+				// Set png icon to white if is in light mode
+				@media (prefers-color-scheme: light) {
+                	filter: brightness(0);
+            	}
+			}
 		}
 	}
 	:global(.shadow-button) {
@@ -100,5 +112,13 @@
         &:active {
             box-shadow: inset 1px 1px 3px black;
         }
+	}
+	.pad-0 {
+		padding: 0;
+	}
+	.up-down-button {
+		background-color: transparent;
+		cursor: pointer;
+		height: 1000px;
 	}
 </style>
