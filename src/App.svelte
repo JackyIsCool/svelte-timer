@@ -66,14 +66,14 @@
 
 <main>
 	{#if currentState == ClockState.countdown}
-		<Clock bind:second={secondLeft} readonly={false}/>
+		<Clock bind:second={secondLeft} currentState={currentState} />
 		<ToggleButton bind:value={isCountingDown}/>
 
 	{:else if currentState == ClockState.time}
-		<Clock second={secondSinceMorning} />
+		<Clock second={secondSinceMorning} currentState={currentState} />
 
 	{:else if currentState == ClockState.timer}
-		<Clock second={secondPassed} />
+		<Clock second={secondPassed} currentState={currentState} />
 		<ToggleButton bind:value={isCountingUp}/>
 	{/if}
 	<SwitchButton bind:currentState/> 
