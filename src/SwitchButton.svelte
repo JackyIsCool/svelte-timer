@@ -54,8 +54,7 @@
 </main>
 <style lang="scss">
     .button-container {
-        position: fixed ;
-        display: flex;
+        position: fixed;
         bottom: 10vh;
         right: 10vh;
     }
