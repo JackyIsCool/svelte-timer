@@ -91,6 +91,7 @@
 			border: none;
 			height: 50px;
 			width: 50px;
+			background-color: var(--second-background-color);
 		}
 	}
 	:global(.shadow-button) {

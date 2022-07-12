@@ -74,7 +74,10 @@
             
             pointer-events: none;
             user-select: none;
-            filter: brightness(0);
+            // Set png icon to white if is in light mode
+            @media (prefers-color-scheme: light) {
+                filter: brightness(0);
+            }
         }
     }
     #menu-button {
@@ -84,6 +87,7 @@
         border-radius: 100%;
         transform-style: preserve-3d;
         z-index: 1;
+        background-color: var(--second-background-color);
         &.active {
             ~.sub-button {
                 transform: translateX(var(--x)) translateY(var(--y));
@@ -95,7 +99,7 @@
         height: $diameter;
         width: $diameter;
         border-radius: 100%;
-        background-color: white;
+        background-color: var(--second-background-color);
         transition: 300ms;
     }
     .blue-bg {

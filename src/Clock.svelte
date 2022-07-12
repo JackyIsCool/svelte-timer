@@ -48,6 +48,8 @@
 		width: 20%;
 		display: inline-block;
 		border: none;
+		background-color: transparent;
+		color: var(--foreground-color);
 		&:focus {
 			outline: none;
 		}

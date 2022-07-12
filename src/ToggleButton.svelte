@@ -12,5 +12,10 @@
             ▶️
         {/if}
     </button>
-    
 </main>
+<style>
+    button {
+        background-color: var(--second-background-color);
+        border-color: transparent;
+    }
+</style>
