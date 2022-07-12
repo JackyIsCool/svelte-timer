@@ -70,33 +70,36 @@
 </script>
 
 <main>
-	<SwitchButton bind:currentState/> 
-	<section>
-	{#if currentState == ClockState.countdown}		
-		<div class="button-container">
-		{#each [3600, 60, 1] as value}
-			<button on:click={() => addTime(value)} class="up-down-button pad-0">
-				<img src="img/up_arrow.png" alt="">
-			</button>
-		{/each}
-		</div>
-		<Clock bind:second={secondLeft} readonly={false}/>
-		<div class="button-container">
-		{#each [-3600, -60, -1] as value}
-			<button on:click={() => addTime(value)} class="up-down-button pad-0">
-				<img src="img/down_arrow.png" alt="">
-			</button>
-		{/each}
+	{#if currentState == ClockState.countdown}
+		<div class="center">
+			<div class="button-container">
+			{#each [3600, 60, 1] as value}
+				<button on:click={() => addTime(value)} class="up-down-button pad-0">
+					<img src="img/up_arrow.png" alt="">
+				</button>
+			{/each}
+			</div>
+			<Clock bind:second={secondLeft} readonly={false}/>
+			<div class="button-container">
+			{#each [-3600, -60, -1] as value}
+				<button on:click={() => addTime(value)} class="up-down-button pad-0">
+					<img src="img/down_arrow.png" alt="">
+				</button>
+			{/each}
+			</div>
 		</div>
 		<ToggleButton bind:value={isCountingDown}/>
 	{:else if currentState == ClockState.time}
-		<Clock second={secondSinceMorning} />
+		<div class="center">
+			<Clock second={secondSinceMorning} />
+		</div>
 	{:else if currentState == ClockState.timer}
-		<Clock second={secondPassed} />
+		<div class="center">
+			<Clock second={secondPassed} />
+		</div>
 		<ToggleButton bind:value={isCountingUp}/>
 	{/if}
-	</section>
-	
+	<SwitchButton bind:currentState/> 
 </main>
 
 <style lang="scss">
@@ -104,9 +107,8 @@
 		font-family: Arial, Helvetica, sans-serif;
 		text-align: center;
 	}
-	section {
+	.center {
 		position: absolute;
-		margin: 0;
   		top: 50%;
 		transform: translateY(-50%);
 	}

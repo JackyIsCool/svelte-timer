@@ -14,6 +14,13 @@
     </button>
 </main>
 <style lang="scss">
+    main {
+        position: fixed;
+        left: 50%;
+        bottom: 20px;
+        transform: translate(-50%, -50%);
+        margin: 0 auto;
+    }
     button {
         margin: 0;
         padding: 10px;
