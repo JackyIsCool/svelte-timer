@@ -3,6 +3,7 @@
 	import SwitchButton from "./SwitchButton.svelte";
 	import { ClockState } from "./ClockState";
 	import ToggleButton from "./ToggleButton.svelte";
+	import { onMount } from "svelte";
 	export let secondLeft: number = 0;//In second
 	let secondSinceMorning: number;
 	let secondPassed: number = 0;
@@ -22,8 +23,29 @@
 		secondPassed ++;
 	}
 	function alertTimeUp() {
-		alert("Time Up");
+		if (Notification.permission !== "granted") {
+			alert("Time Up");
+			Notification.requestPermission();
+		}	
+		else {
+			var notification = new Notification("Times Up!", {
+				icon: "favicon.png",
+				body: "倒计时已结束",
+			});
+			notification.onclick = function() {
+				// Do something on user click the notification
+			};
+		}
 	}
+
+	onMount(() => {
+		if (!Notification) {
+			// alert("It seems like your current browser doesn't support notification\n你的浏览器不支持消息提醒");
+			return;
+		}
+ 		if (Notification.permission !== "granted")
+  			Notification.requestPermission();
+	})
 	setInterval(() => {
 		if (isCountingDown) {
 			if (secondLeft > 0) {
