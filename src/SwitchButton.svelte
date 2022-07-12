@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { mousePosition, windowSize } from "./mousePosition";
+    import { mousePosition } from "./mousePosition";
 	import { ClockState } from "./ClockState";
 	export let currentState: ClockState;
     class Button {
@@ -23,7 +23,7 @@
     let isCloseTo = false;
     $: active = isPin || isCloseTo;
     setInterval(() => {
-        if((windowSize.x - mousePosition.x) > 150 && (windowSize.y - mousePosition.y) > 150) {
+        if((window.innerWidth - mousePosition.x) > 150 && (window.innerHeight - mousePosition.y) > 150) {
             isCloseTo = false;
         }
     });
