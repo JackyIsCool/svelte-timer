@@ -1,11 +1,12 @@
 :root {
+	--is-dark-mode: 0;
 	--background-color: white;
 	--second-background-color: rgb(248, 248, 248);
 	--foreground-color: black;
-
 }
 @media (prefers-color-scheme: dark) {
 	:root {
+		--is-dark-mode: 1;
 		--background-color: #303133;
 		--second-background-color: #4b4b4b;
 		--foreground-color: white;

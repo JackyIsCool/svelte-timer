@@ -75,9 +75,7 @@
             pointer-events: none;
             user-select: none;
             // Set png icon to white if is in light mode
-            @media (prefers-color-scheme: light) {
-                filter: brightness(0);
-            }
+            filter: brightness(var(--is-dark-mode));
         }
     }
     #menu-button {
