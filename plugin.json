@@ -1,0 +1,11 @@
+{
+	"main": "public/index.html",
+	"logo": "public/favicon.png",
+	"features": [
+		{
+		  "code": "hello",
+		  "explain": "多功能钟",
+			"cmds":["multiclock", "clock", "计时", "钟", "时间"]
+		}
+	]
+}

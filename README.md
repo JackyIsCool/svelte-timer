@@ -10,3 +10,5 @@
 ## Todo:
 - [ ] Styling
 - [ ] Use Electron to turn this into a desktop app with more function
+- [ ] Dark Mode
+- [ ] Support utools plugin
