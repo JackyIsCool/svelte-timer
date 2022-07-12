@@ -116,7 +116,7 @@
 		button {
 			@extend :global(.shadow-button);
 			border: none;
-			border-radius: 50px;
+			border-radius: 100%;
 			height: 50px;
 			width: 50px;
 			background-color: var(--second-background-color);
