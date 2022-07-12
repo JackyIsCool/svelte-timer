@@ -34,6 +34,7 @@
 		display: flex;
 		justify-content: center;
 		.time-text {
+			color: var(--foreground-color);
 			font-size: 12vw;
 			padding: 0;
 			margin: 0;
@@ -49,7 +50,6 @@
 		display: inline-block;
 		border: none;
 		background-color: transparent;
-		color: var(--foreground-color);
 		&:focus {
 			outline: none;
 		}
