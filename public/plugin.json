@@ -1,6 +1,6 @@
 {
-	"main": "public/index.html",
-	"logo": "public/favicon.png",
+	"main": "index.html",
+	"logo": "favicon.png",
 	"features": [
 		{
 		  "code": "hello",
