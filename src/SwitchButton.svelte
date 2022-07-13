@@ -55,8 +55,8 @@
 <style lang="scss">
     .button-container {
         position: fixed;
-        bottom: 10vh;
-        right: 10vh;
+        bottom: calc(50px + 5vh);   // 50px is [$diameter] of buttons
+        right: calc(50px + 5vh);
     }
     span {
         display: block;
