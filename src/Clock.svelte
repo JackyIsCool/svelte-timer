@@ -18,6 +18,10 @@
 		let endResult: number = second + time;
 		second = endResult >= 0 ? endResult : 0; // Prevent time less than 0
 	}
+	function onType(this: HTMLElement, event: KeyboardEvent) {
+		if (event.key === "Enter")
+			this.blur();
+	}
     // setInterval(() => {
     //     console.log(second);
     // })
@@ -34,11 +38,11 @@
 	{/each}
 	{/if}
 	<input bind:value={formatedHour} style="grid-area: hour-text" 
-		type="number" class="time-text" class:input-text={isTyping} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
+		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
 	<input bind:value={formatedMinute} style="grid-area: min-text" 
-		type="number" class="time-text" class:input-text={isTyping} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
+		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
 	<input bind:value={formatedSecond} style="grid-area: sec-text" 
-		type="number" class="time-text" class:input-text={isTyping} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
+		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
 	<div class="time-text" style="grid-area: colon-1;">:</div>
 	<div class="time-text" style="grid-area: colon-2;">:</div>
 </main>
