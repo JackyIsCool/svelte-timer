@@ -47,6 +47,7 @@
 	<div class="time-text" style="grid-area: colon-2;">:</div>
 </main>
 <style lang="scss">
+	@import "Global.scss";
 	main {
 		display: grid;
 		grid-template-areas:
@@ -71,18 +72,7 @@
 		}
 	}
 	button {
-		border: none;
-		border-radius: 100%;
-		height: 50px;
-		width: 50px;
-		background-color: var(--second-background-color);
-		
-		img {
-			// Set png icon to white if is in light mode
-			width: 100%;
-			height: 100%;
-			filter: brightness(var(--is-dark-mode));
-		}
+		@extend .circle-btn;
 	}
 	.center {
 		position: absolute;

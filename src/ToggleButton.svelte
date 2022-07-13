@@ -14,6 +14,7 @@
     </button>
 </main>
 <style lang="scss">
+    @import "Global.scss";
     main {
         position: fixed;
         left: 50%;
@@ -22,17 +23,9 @@
         margin: 0 auto;
     }
     button {
-        margin: 0;
+        @extend .circle-btn;
         padding: 10px;
-        border-radius: 100%;
-        background-color: var(--second-background-color);
-        border-color: transparent;
         height: 60px;
         width: 60px;
-        img {
-            height: 100%;
-            width: 100%;
-            filter: brightness(var(--is-dark-mode));
-        }
     }
 </style>

@@ -30,61 +30,41 @@
 </script>
 <main>
     <div class="button-container">
-        <span id="menu-button" 
+        <button id="menu-button" 
             class="shadow-button"
             class:active={active}
             class:blue-bg={isPin}
-            on:click|self={() => isPin = !isPin} 
+            on:click={() => isPin = !isPin} 
             on:mouseenter={() => isCloseTo = true}
         >
             <!-- TODO: pin animation when clicked -->
             <img src="img/pin.png" alt="">
-        </span>
+        </button>
     {#each buttons as button}
-        <span 
+        <button 
             class="sub-button shadow-button" 
             class:blue-bg={currentState == button.toState}
             style="--x: {button.toX}px; --y: {button.toY}px"
             on:click={() => currentState = button.toState}
         >    
             <img src={button.imageURL} alt="">
-        </span>
+        </button>
     {/each}
     </div>
 </main>
 <style lang="scss">
+    @import "Global.scss";
     .button-container {
         position: fixed;
         bottom: calc(50px + 5vh);   // 50px is [$diameter] of buttons
         right: calc(50px + 5vh);
     }
-    span {
-        display: block;
-        background-color: white;
+    button {
         position: absolute;
-        img {
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            position: absolute;
-            left: 0;
-            right: 0;
-            width: 75%;
-            
-            pointer-events: none;
-            user-select: none;
-            // Set png icon to white if is in light mode
-            filter: brightness(var(--is-dark-mode));
-        }
     }
     #menu-button {
-        $diameter: 50px;
-        height: $diameter;
-        width: $diameter;
-        border-radius: 100%;
-        transform-style: preserve-3d;
+        @extend .circle-btn;
         z-index: 1;
-        background-color: var(--second-background-color);
         &.active {
             ~.sub-button {
                 transform: translateX(var(--x)) translateY(var(--y));
@@ -92,11 +72,7 @@
         }
     }
     .sub-button {
-        $diameter: 50px;
-        height: $diameter;
-        width: $diameter;
-        border-radius: 100%;
-        background-color: var(--second-background-color);
+        @extend .circle-btn;
         transition: 300ms;
     }
     .blue-bg {
