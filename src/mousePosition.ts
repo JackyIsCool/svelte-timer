@@ -3,5 +3,4 @@ document.body.addEventListener("mousemove", move);
 function move(event:any) {
     mousePosition.x = event.clientX;
     mousePosition.y = event.clientY;
-    mousePosition = mousePosition;
 }
