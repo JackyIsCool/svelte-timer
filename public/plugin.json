@@ -5,7 +5,7 @@
 		{
 		  "code": "hello",
 		  "explain": "MultiClock 多功能钟",
-			"cmds":["multiclock", "clock", "timer", "countdown", "多功能钟", "钟", "时间", "计时", "倒计时"]
+			"cmds":["multimer", "clock", "timer", "countdown", "多功能钟", "钟", "时间", "计时", "倒计时"]
 		}
 	]
 }
