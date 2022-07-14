@@ -81,7 +81,7 @@
 		<Clock second={secondPassed} currentState={currentState} />
 		<div class="btn-container">
 			<ToggleButton bind:value={isCountingUp}/>
-			<button id="restart-btn" class="shadow-button" on:click={resetTimer}>
+			<button id="restart-btn" class="shadow-btn" on:click={resetTimer}>
 				<img src="img/restart.png" alt="">
 			</button>
 		</div>
@@ -94,12 +94,6 @@
 	main {
 		font-family: Arial, Helvetica, sans-serif;
 		text-align: center;
-	}
-	:global(.shadow-button) {
-        box-shadow: 1px 1px 3px black;
-        &:active {
-            box-shadow: inset 1px 1px 3px black;
-        }
 	}
 	.btn-container {
 		display: flex;

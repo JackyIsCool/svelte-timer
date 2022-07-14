@@ -12,3 +12,9 @@
         filter: brightness(var(--is-dark-mode));
     }
 }
+.shadow-btn {
+    box-shadow: 1px 1px 3px black;
+    &:active {
+        box-shadow: inset 1px 1px 3px black;
+    }
+}

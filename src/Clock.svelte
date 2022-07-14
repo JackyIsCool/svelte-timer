@@ -29,7 +29,7 @@
 <main class="center">
 	{#if currentState === ClockState.countdown}
 	{#each [3600, 60, 1, -3600, -60, -1] as value}
-		<button style="grid-area: btn-{value}" on:click={() => addTime(value)} class="shadow-button">
+		<button style="grid-area: btn-{value}" on:click={() => addTime(value)} class="shadow-btn">
 			<img 
 				src={value > 0 ? "img/up_arrow.png" : "img/down_arrow.png"}
 				alt=""

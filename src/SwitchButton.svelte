@@ -31,7 +31,7 @@
 <main>
     <div class="button-container">
         <button id="menu-button" 
-            class="shadow-button"
+            class="shadow-btn"
             class:active={active}
             class:blue-bg={isPin}
             on:click={() => isPin = !isPin} 
@@ -42,7 +42,7 @@
         </button>
     {#each buttons as button}
         <button 
-            class="sub-button shadow-button" 
+            class="sub-button shadow-btn" 
             class:blue-bg={currentState == button.toState}
             style="--x: {button.toX}px; --y: {button.toY}px"
             on:click={() => currentState = button.toState}
