@@ -21,12 +21,15 @@
     ];
     let isPin:boolean = false;
     let isCloseTo = false;
-    $: active = isPin || isCloseTo;
+    $: active = isPin || (isCloseTo && !isOnMobile());    // since mobile don't have cursor, [isCloseTo] is not important
     setInterval(() => {
         if((window.innerWidth - mousePosition.x) > 150 && (window.innerHeight - mousePosition.y) > 150) {
             isCloseTo = false;
         }
     });
+    function isOnMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    }
 </script>
 <main>
     <div class="button-container">
