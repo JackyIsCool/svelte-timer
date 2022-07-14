@@ -17,6 +17,9 @@
 	function countUp() {
 		secondPassed ++;
 	}
+	function resetTimer() {
+		secondPassed = 0;
+	}
 	function alertTimeUp() {
 		if (Notification.permission !== "granted") {
 			alert("Time Up");
@@ -67,28 +70,48 @@
 <main>
 	{#if currentState == ClockState.countdown}
 		<Clock bind:second={secondLeft} currentState={currentState} />
-		<ToggleButton bind:value={isCountingDown}/>
+		<div class="btn-container">
+			<ToggleButton bind:value={isCountingDown}/>
+		</div>
 
 	{:else if currentState == ClockState.time}
 		<Clock second={secondSinceMorning} currentState={currentState} />
 
 	{:else if currentState == ClockState.timer}
 		<Clock second={secondPassed} currentState={currentState} />
-		<ToggleButton bind:value={isCountingUp}/>
+		<div class="btn-container">
+			<ToggleButton bind:value={isCountingUp}/>
+			<button id="restart-btn" class="shadow-button" on:click={resetTimer}>
+				<img src="img/restart.png" alt="">
+			</button>
+		</div>
 	{/if}
 	<SwitchButton bind:currentState/> 
 </main>
 
 <style lang="scss">
+	@import "Global.scss";
 	main {
 		font-family: Arial, Helvetica, sans-serif;
 		text-align: center;
 	}
 	:global(.shadow-button) {
         box-shadow: 1px 1px 3px black;
-		cursor: pointer;
         &:active {
             box-shadow: inset 1px 1px 3px black;
         }
+	}
+	.btn-container {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+        position: fixed;
+        left: calc(50% - 30px);	// 30px=half of the [ToggleButton](aka first button)
+        bottom: 6vh;
+	}
+	#restart-btn {
+		@extend .circle-btn;
+		width: 30px;
+		height: 30px;;
 	}
 </style>
