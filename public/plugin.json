@@ -3,9 +3,24 @@
 	"logo": "favicon.png",
 	"features": [
 		{
-		  "code": "hello",
-		  "explain": "MultiClock 多功能钟",
-			"cmds":["multimer", "clock", "timer", "countdown", "多功能钟", "钟", "时间", "计时", "倒计时"]
+			"code": "default",
+			"explain": "Default entry",
+			"cmds": ["multimer", "多功能钟"]
+		},
+		{
+		  "code": "countdown",
+		  "explain": "Go to countdown",
+			"cmds":["countdown", "倒计时"]
+		},
+		{
+		  "code": "time",
+		  "explain": "Go to time",
+			"cmds":["time", "clock", "时间", "钟"]
+		},
+		{
+		  "code": "timer",
+		  "explain": "Go to timer",
+			"cmds":["timer", "计时"]
 		}
 	]
 }

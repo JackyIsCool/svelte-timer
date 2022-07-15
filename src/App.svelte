@@ -43,6 +43,23 @@
 		}
  		if (Notification.permission !== "granted")
   			Notification.requestPermission();
+			
+		window.utools.onPluginEnter(({code, type, payload}) => {
+			// console.log('用户进入插件', code, type, payload);
+			switch (code) {
+				case "countdown":
+					currentState = ClockState.countdown;
+					break;
+				case "time":
+					currentState = ClockState.time;
+					break;
+				case "timer":
+					currentState = ClockState.timer;
+					break;
+				default:
+					break;
+			}
+		})
 	})
 	setInterval(() => {
 		if (isCountingDown) {
