@@ -21,6 +21,18 @@
 		  "code": "timer",
 		  "explain": "Go to timer",
 			"cmds":["timer", "计时"]
+		},
+		{
+			"code": "countdown-input",
+			"explain": "Go to countdown with input value",
+			"cmds": [
+				{
+					"type": "regex",
+					"label": "打开倒计时",
+					"match": "/([0-9]+):([0-9]+):([0-9]+)$|([0-9]+):([0-9]+)$|([0-9]+)$/"
+				}
+			]
+			
 		}
 	]
 }

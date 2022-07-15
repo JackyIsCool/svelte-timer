@@ -35,6 +35,20 @@
 			};
 		}
 	}
+	function textToSecond(text: string): number {	// example: "00:02:15" -> 135(seconds)
+		let numbers: number[] = text.match(/\d+/g)?.map(Number)!;	// Get hour, minute, second in a number[]
+		
+		switch (numbers.length) {
+			case 1:
+				return numbers[0]
+			case 2:
+				return numbers[0] * 60 + numbers[1]
+			case 3:
+				return numbers[0] * 3600 + numbers[1] * 60 + numbers[2]
+			default:
+				return -1;
+		}
+	}
 
 	onMount(() => {
 		if (!Notification) {
@@ -49,6 +63,11 @@
 			switch (code) {
 				case "countdown":
 					currentState = ClockState.countdown;
+					break;
+				case "countdown-input":
+					currentState = ClockState.countdown;
+					secondLeft = textToSecond(payload);
+					isCountingDown = true;
 					break;
 				case "time":
 					currentState = ClockState.time;
