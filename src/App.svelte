@@ -35,7 +35,7 @@
 			};
 		}
 	}
-	function textToSecond(text: string): number {	// example: "00:02:15" -> 135(seconds)
+	function clockText2Second(text: string): number {	// example: "00:02:15" -> 135(seconds)
 		let numbers: number[] = text.match(/\d+/g)?.map(Number)!;	// Get hour, minute, second in a number[]
 		
 		switch (numbers.length) {
@@ -48,6 +48,26 @@
 			default:
 				return -1;
 		}
+	}
+	// Example: "3m1m2s" -> 180s+60s+2s -> 242s
+	function letterText2Second(text: string): number {
+		// Separate all numbers in days, hours, minutes, second. Example: "3m1m4s" -> minutes = [3, 1]; seconds = [4]
+		let days: number[] = text.match(/[0-9]+(?=d)/g)?.map(Number) ?? [];	// Set to [](empty array) if [text.match()] is undefined
+		let hours: number[] = text.match(/[0-9]+(?=h)/g)?.map(Number) ?? [];
+		let minutes: number[] = text.match(/[0-9]+(?=m)/g)?.map(Number) ?? [];
+		let seconds: number[] = text.match(/[0-9]+(?=s)/g)?.map(Number) ?? [];
+		// Sum up all the numbers in arrays
+		let day = sum(days);
+		let hour = sum(hours);
+		let minute = sum(minutes);
+		let second = sum(seconds);
+		// get the result in second
+		let result = (((day * 24) + hour) * 60 + minute) * 60 + second;
+		return result;
+	}
+
+	function sum(numbers: number[]): number {
+		return numbers.reduce((a, b) => a + b, 0);
 	}
 
 	onMount(() => {
@@ -64,9 +84,14 @@
 				case "countdown":
 					currentState = ClockState.countdown;
 					break;
-				case "countdown-input":
+				case "countdown-input-clock":
 					currentState = ClockState.countdown;
-					secondLeft = textToSecond(payload);
+					secondLeft = clockText2Second(payload);
+					isCountingDown = true;
+					break;
+				case "countdown-input-letter":
+					currentState = ClockState.countdown;
+					secondLeft = letterText2Second(payload);
 					isCountingDown = true;
 					break;
 				case "time":

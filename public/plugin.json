@@ -23,13 +23,25 @@
 			"cmds":["timer", "计时"]
 		},
 		{
-			"code": "countdown-input",
+			"code": "countdown-input-clock",
 			"explain": "Go to countdown with input value",
 			"cmds": [
 				{
 					"type": "regex",
 					"label": "打开倒计时",
 					"match": "/^(([0-9]+):([0-9]+):([0-9]+)$|([0-9]+):([0-9]+)$|([0-9]+))$/"
+				}
+			]
+			
+		},
+		{
+			"code": "countdown-input-letter",
+			"explain": "Go to countdown with input value, by letter(d(ay), h(our), m(inute), s(econd)",
+			"cmds": [
+				{
+					"type": "regex",
+					"label": "打开倒计时",
+					"match": "/^([0-9]+[dhms])+$/"
 				}
 			]
 			
