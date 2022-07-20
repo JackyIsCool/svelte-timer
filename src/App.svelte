@@ -40,11 +40,11 @@
 		
 		switch (numbers.length) {
 			case 1:
-				return numbers[0]
+				return numbers[0];
 			case 2:
-				return numbers[0] * 60 + numbers[1]
+				return time2Second(numbers[1], numbers[0]);
 			case 3:
-				return numbers[0] * 3600 + numbers[1] * 60 + numbers[2]
+				return time2Second(numbers[2], numbers[1], numbers[0]);
 			default:
 				return -1;
 		}
@@ -62,12 +62,16 @@
 		let minute = sum(minutes);
 		let second = sum(seconds);
 		// get the result in second
-		let result = (((day * 24) + hour) * 60 + minute) * 60 + second;
+		let result = time2Second(second, minute, hour, day);
 		return result;
 	}
 
 	function sum(numbers: number[]): number {
 		return numbers.reduce((a, b) => a + b, 0);
+	}
+
+	function time2Second(second: number, minute: number = 0, hour: number = 0, day: number = 0) {
+		return (((day * 24) + hour) * 60 + minute) * 60 + second;
 	}
 
 	onMount(() => {
