@@ -10,6 +10,14 @@
 
 	// Countdown
 	let isCountingDown: boolean = false;
+	$: {
+		if (isCountingDown)
+			startCountDown()
+		else
+			stopCountDown()
+	}
+	let countdownStartTime: number;
+	let countdownInterval: NodeJS.Timer;
 	export let secondLeft: number = 0;	//In second
 	// Time
 	let secondSinceMorning: number;
@@ -24,10 +32,23 @@
 	let secondPassed: number = 0;
 	let timerStartTime: number;
 	let timerInterval: NodeJS.Timer;
-	
-	// Countdown
-	function countDown() {
-		secondLeft --;
+
+	// (TODO: Refactor [countdown, time, timer] into classes)	
+	// Countdown function
+	function startCountDown() {
+		countdownStartTime = Date.now() + secondLeft * 1000;
+		countdownInterval = setInterval(() => {
+			secondLeft = (countdownStartTime - Date.now()) / 1000;
+			//Detect if secondLeft meet 0 after countDown()
+			if (secondLeft <= 0) {
+				alertTimeUp();
+				isCountingDown = false;
+				secondLeft = 0;
+			}
+		})	
+	}
+	function stopCountDown() {
+		clearInterval(countdownInterval);
 	}
 	function alertTimeUp() {
 		if (Notification.permission !== "granted") {
@@ -58,18 +79,6 @@
 		secondPassed = 0;
 	}
 	//
-	setInterval(() => {
-		if (isCountingDown) {
-			if (secondLeft > 0) {
-				countDown();	
-			} 
-			//Detect if secondLeft meet 0 after countDown()
-			if (secondLeft <= 0) {
-				alertTimeUp();
-				isCountingDown = false;
-			}
-		}
-	}, 1000);
 	setInterval(() => {
 		const date = new Date();
 		const timeInSecond = date.getTime() / 1000;
