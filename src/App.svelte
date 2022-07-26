@@ -4,21 +4,30 @@
 	import { ClockState } from "./ClockState";
 	import ToggleButton from "./ToggleButton.svelte";
 	import { onMount } from "svelte";
-	export let secondLeft: number = 0;//In second
-	let secondSinceMorning: number;
-	let secondPassed: number = 0;
-	let isCountingDown: boolean = false;
-	let isCountingUp: boolean = false;
+
+	// Current Clock
 	let currentState: ClockState = ClockState.countdown;
+
+	// Countdown
+	let isCountingDown: boolean = false;
+	export let secondLeft: number = 0;	//In second
+	// Time
+	let secondSinceMorning: number;
+	// Timer
+	let isCountingUp: boolean = false;
+	$: {
+		if (isCountingUp)
+			startTimer()
+		else
+			stopTimer()
+	}
+	let secondPassed: number = 0;
+	let timerStartTime: number;
+	let timerInterval: NodeJS.Timer;
 	
+	// Countdown
 	function countDown() {
 		secondLeft --;
-	}
-	function countUp() {
-		secondPassed ++;
-	}
-	function resetTimer() {
-		secondPassed = 0;
 	}
 	function alertTimeUp() {
 		if (Notification.permission !== "granted") {
@@ -35,6 +44,39 @@
 			};
 		}
 	}
+	// Timer
+	function startTimer() {
+		timerStartTime = Date.now() - secondPassed * 1000;	// Record the time of pressing start, and store [secondPassed] into it
+		timerInterval = setInterval(() => {
+			secondPassed = (Date.now() - timerStartTime) / 1000;
+		});
+	}
+	function stopTimer() {
+		clearInterval(timerInterval);
+	}
+	function resetTimer() {
+		secondPassed = 0;
+	}
+	//
+	setInterval(() => {
+		if (isCountingDown) {
+			if (secondLeft > 0) {
+				countDown();	
+			} 
+			//Detect if secondLeft meet 0 after countDown()
+			if (secondLeft <= 0) {
+				alertTimeUp();
+				isCountingDown = false;
+			}
+		}
+	}, 1000);
+	setInterval(() => {
+		const date = new Date();
+		const timeInSecond = date.getTime() / 1000;
+		const timeZoneOffsetSecond = date.getTimezoneOffset() * 60;
+		secondSinceMorning = Math.floor((timeInSecond - timeZoneOffsetSecond) % 86400);
+	});
+	// Utools	
 	function clockText2Second(text: string): number {	// example: "00:02:15" -> 135(seconds)
 		let numbers: number[] = text.match(/\d+/g)?.map(Number)!;	// Get hour, minute, second in a number[]
 		
@@ -109,27 +151,6 @@
 			}
 		})
 	})
-	setInterval(() => {
-		if (isCountingDown) {
-			if (secondLeft > 0) {
-				countDown();	
-			} 
-			//Detect if secondLeft meet 0 after countDown()
-			if (secondLeft <= 0) {
-				alertTimeUp();
-				isCountingDown = false;
-			}
-		}
-		if (isCountingUp) {
-			countUp();
-		}
-	}, 1000);
-	setInterval(() => {
-		const date = new Date();
-		const timeInSecond = date.getTime() / 1000;
-		const timeZoneOffsetSecond = date.getTimezoneOffset() * 60;
-		secondSinceMorning = Math.floor((timeInSecond - timeZoneOffsetSecond) % 86400);
-	});
 </script>
 
 <main>
