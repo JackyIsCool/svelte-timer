@@ -18,9 +18,9 @@
 	}
 	let countdownStartTime: number;
 	let countdownInterval: NodeJS.Timer;
-	export let secondLeft: number = 0;	//In second
+	export let msecondLeft: number = 0;	//In second
 	// Time
-	let secondSinceMorning: number;
+	let msecondSinceMorning: number;
 	// Timer
 	let isCountingUp: boolean = false;
 	$: {
@@ -29,21 +29,21 @@
 		else
 			stopTimer()
 	}
-	let secondPassed: number = 0;
+	let msecondPassed: number = 0;
 	let timerStartTime: number;
 	let timerInterval: NodeJS.Timer;
 
 	// (TODO: Refactor [countdown, time, timer] into classes)	
 	// Countdown function
 	function startCountDown() {
-		countdownStartTime = Date.now() + secondLeft * 1000;
+		countdownStartTime = Date.now() + msecondLeft;
 		countdownInterval = setInterval(() => {
-			secondLeft = (countdownStartTime - Date.now()) / 1000;
+			msecondLeft = countdownStartTime - Date.now();
 			//Detect if secondLeft meet 0 after countDown()
-			if (secondLeft <= 0) {
+			if (msecondLeft <= 0) {
 				alertTimeUp();
 				isCountingDown = false;
-				secondLeft = 0;
+				msecondLeft = 0;
 			}
 		})	
 	}
@@ -67,23 +67,22 @@
 	}
 	// Timer
 	function startTimer() {
-		timerStartTime = Date.now() - secondPassed * 1000;	// Record the time of pressing start, and store [secondPassed] into it
+		timerStartTime = Date.now() - msecondPassed;	// Record the time of pressing start, and store [secondPassed] into it
 		timerInterval = setInterval(() => {
-			secondPassed = (Date.now() - timerStartTime) / 1000;
+			msecondPassed = Date.now() - timerStartTime;
 		});
 	}
 	function stopTimer() {
 		clearInterval(timerInterval);
 	}
 	function resetTimer() {
-		secondPassed = 0;
+		msecondPassed = 0;
 	}
 	//
 	setInterval(() => {
 		const date = new Date();
-		const timeInSecond = date.getTime() / 1000;
-		const timeZoneOffsetSecond = date.getTimezoneOffset() * 60;
-		secondSinceMorning = Math.floor((timeInSecond - timeZoneOffsetSecond) % 86400);
+		const timeZoneOffsetSecond = date.getTimezoneOffset() * 60000;
+		msecondSinceMorning = (date.getTime() - timeZoneOffsetSecond) % 86400000;	// Fun fact: 1day = 86400000ms
 	});
 	// Utools	
 	function clockText2Second(text: string): number {	// example: "00:02:15" -> 135(seconds)
@@ -141,12 +140,12 @@
 					break;
 				case "countdown-input-clock":
 					currentState = ClockState.countdown;
-					secondLeft = clockText2Second(payload);
+					msecondLeft = clockText2Second(payload);
 					isCountingDown = true;
 					break;
 				case "countdown-input-letter":
 					currentState = ClockState.countdown;
-					secondLeft = letterText2Second(payload);
+					msecondLeft = letterText2Second(payload);
 					isCountingDown = true;
 					break;
 				case "time":
@@ -164,16 +163,16 @@
 
 <main>
 	{#if currentState == ClockState.countdown}
-		<Clock bind:second={secondLeft} currentState={currentState} />
+		<Clock bind:msecond={msecondLeft} currentState={currentState} />
 		<div class="btn-container">
 			<ToggleButton bind:value={isCountingDown}/>
 		</div>
 
 	{:else if currentState == ClockState.time}
-		<Clock second={secondSinceMorning} currentState={currentState} />
+		<Clock msecond={msecondSinceMorning} currentState={currentState} />
 
 	{:else if currentState == ClockState.timer}
-		<Clock second={secondPassed} currentState={currentState} />
+		<Clock msecond={msecondPassed} currentState={currentState} />
 		<div class="btn-container">
 			<ToggleButton bind:value={isCountingUp}/>
 			<button id="restart-btn" class="shadow-btn" on:click={resetTimer}>

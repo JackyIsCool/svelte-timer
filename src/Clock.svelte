@@ -1,26 +1,32 @@
 <script lang="ts">
 	import { ClockState } from "./ClockState";
 
-    export let second: number;
+    export let msecond: number;
 	export let currentState: ClockState;
 
 	let isTyping: boolean;
 
-	$: formatedHour = String(Math.floor(second / 3600)).padStart(2, '0');
-	$: formatedMinute = String(Math.floor(second % 3600 / 60)).padStart(2, '0');
-	$: formatedSecond = String(Math.floor(second % 60)).padStart(2, '0');
+	$: formatedHour = String(Math.floor(msecond / 3600000)).padStart(2, '0');
+	$: formatedMinute = String(Math.floor(msecond % 3600000 / 60000)).padStart(2, '0');
+	$: formatedSecond = String(Math.floor(msecond % 60000 / 1000)).padStart(2, '0');
     
 	function syncTypedTime() {
-		let endResult: number = parseInt(formatedHour) * 3600 + parseInt(formatedMinute) * 60 + parseInt(formatedSecond);
-		second = endResult >= 0 ? endResult : 0; // Prevent time less than 0
+		let endResult: number = parseInt(formatedHour) * 3600000 + parseInt(formatedMinute) * 60000 + parseInt(formatedSecond) * 1000;
+		msecond = endResult >= 0 ? endResult : 0; // Prevent time less than 0
 	}
 	function addTime(time:number) {
-		let endResult: number = second + time;
-		second = endResult >= 0 ? endResult : 0; // Prevent time less than 0
+		let endResult: number = msecond + time;
+		msecond = endResult >= 0 ? endResult : 0; // Prevent time less than 0
 	}
 	function onType(this: HTMLElement, event: KeyboardEvent) {
 		if (event.key === "Enter")
 			this.blur();
+	}
+	function msecond2Second(millisecond: number): number {
+		return millisecond / 1000;	
+	}
+	function msecond2Minute(millisecond: number): number {
+		return millisecond / 360000;	
 	}
     // setInterval(() => {
     //     console.log(second);
@@ -28,10 +34,10 @@
 </script>
 <main class="center">
 	{#if currentState === ClockState.countdown}
-	{#each [3600, 60, 1, -3600, -60, -1] as value}
-		<button style="grid-area: btn-{value}" on:click={() => addTime(value)} class="shadow-btn">
+	{#each [3600, 60, 1, -3600, -60, -1] as second}
+		<button style="grid-area: btn-{second}" on:click={() => addTime(second * 1000)} class="shadow-btn">
 			<img 
-				src={value > 0 ? "img/up_arrow.png" : "img/down_arrow.png"}
+				src={second > 0 ? "img/up_arrow.png" : "img/down_arrow.png"}
 				alt=""
 			/>
 		</button>
