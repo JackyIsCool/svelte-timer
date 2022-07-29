@@ -76,6 +76,7 @@
 		clearInterval(timerInterval);
 	}
 	function resetTimer() {
+		timerStartTime = Date.now();
 		msecondPassed = 0;
 	}
 	//
