@@ -9,6 +9,7 @@
 	$: formatedHour = String(Math.floor(msecond / 3600000)).padStart(2, '0');
 	$: formatedMinute = String(Math.floor(msecond % 3600000 / 60000)).padStart(2, '0');
 	$: formatedSecond = String(Math.floor(msecond % 60000 / 1000)).padStart(2, '0');
+	$: formatedMsecond = String(msecond % 1000).padStart(3, '0');
     
 	function syncTypedTime() {
 		let endResult: number = parseInt(formatedHour) * 3600000 + parseInt(formatedMinute) * 60000 + parseInt(formatedSecond) * 1000;
@@ -49,6 +50,7 @@
 		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
 	<input bind:value={formatedSecond} style="grid-area: sec-text" 
 		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
+	<div class="ms-text" style="grid-area: ms-text;">{formatedMsecond}</div>
 	<div class="time-text" style="grid-area: colon-1;">:</div>
 	<div class="time-text" style="grid-area: colon-2;">:</div>
 </main>
@@ -56,10 +58,11 @@
 	@import "Global.scss";
 	main {
 		display: grid;
+		grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr 1fr;
 		grid-template-areas:
-			"btn-3600	. 		btn-60		.		btn-1"
-			"hour-text 	colon-1 min-text	colon-2	sec-text"
-			"btn--3600	. 		btn--60		. 		btn--1";
+			".	btn-3600	. 		btn-60		.		btn-1		."
+			".	hour-text 	colon-1 min-text	colon-2	sec-text	ms-text"
+			".	btn--3600	. 		btn--60		. 		btn--1		.";
 		// grid-template-columns: 3fr 1fr 3fr 1fr 3fr;
 		justify-items: center;
 		padding: 0 10vw;
@@ -70,6 +73,13 @@
 		padding: 0;
 		margin: 0;
 		text-align: center;
+		align-self: baseline;
+	}
+	.ms-text {
+		@extend .time-text;
+		align-self: baseline;
+		font-size: 4vw;
+		color: #605e5c;
 	}
 	.input-text {
 		&:not(:focus) {
