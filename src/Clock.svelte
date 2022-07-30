@@ -50,7 +50,10 @@
 		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
 	<input bind:value={formatedSecond} style="grid-area: sec-text" 
 		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
+	{#if currentState === ClockState.timer}	
 	<div class="ms-text" style="grid-area: ms-text;">{formatedMsecond}</div>
+	{/if}
+	
 	<div class="time-text" style="grid-area: colon-1;">:</div>
 	<div class="time-text" style="grid-area: colon-2;">:</div>
 </main>
