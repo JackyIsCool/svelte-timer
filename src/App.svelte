@@ -140,12 +140,12 @@
 					break;
 				case "countdown-input-clock":
 					currentState = ClockState.countdown;
-					msecondLeft = clockText2Second(payload);
+					msecondLeft = clockText2Second(payload) * 1000;
 					isCountingDown = true;
 					break;
 				case "countdown-input-letter":
 					currentState = ClockState.countdown;
-					msecondLeft = letterText2Second(payload);
+					msecondLeft = letterText2Second(payload) * 1000;
 					isCountingDown = true;
 					break;
 				case "time":
