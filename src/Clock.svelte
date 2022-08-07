@@ -19,6 +19,12 @@
 		let endResult: number = msecond + time;
 		msecond = endResult >= 0 ? endResult : 0; // Prevent time less than 0
 	}
+	function scrollTime(event: WheelEvent, multiplier: number) {
+		if (currentState !== ClockState.countdown)
+			return;
+		// Fun fact: Math.sign(number) turn the number to raw(-1, 0,or 1)
+		addTime(Math.sign(event.deltaY) * multiplier);
+	}
 	function onType(this: HTMLElement, event: KeyboardEvent) {
 		if (event.key === "Enter")
 			this.blur();
@@ -45,11 +51,11 @@
 	{/each}
 	{/if}
 	<input bind:value={formatedHour} style="grid-area: hour-text" 
-		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
+		type="number" class="time-text" class:input-text={isTyping} on:wheel={(e) => scrollTime(e, 3600000)} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
 	<input bind:value={formatedMinute} style="grid-area: min-text" 
-		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
+		type="number" class="time-text" class:input-text={isTyping} on:wheel={(e) => scrollTime(e, 60000)} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
 	<input bind:value={formatedSecond} style="grid-area: sec-text" 
-		type="number" class="time-text" class:input-text={isTyping} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
+		type="number" class="time-text" class:input-text={isTyping} on:wheel={(e) => scrollTime(e, 1000)} on:keypress={onType} on:blur={()=>{syncTypedTime(); isTyping = false}} on:focus={()=>isTyping = true} readonly={currentState !== ClockState.countdown} />
 	{#if currentState === ClockState.timer}	
 	<div class="ms-text" style="grid-area: ms-text;">{formatedMsecond}</div>
 	{/if}
