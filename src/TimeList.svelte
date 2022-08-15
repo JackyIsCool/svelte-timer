@@ -12,25 +12,40 @@
 </script>
 
 <main>
-    {#each times as time}
-        <div>{time}</div>   
-    {/each}
+    <div class="scroll-container"> 
+        {#each times as time}
+            <div class="time">{time}</div>
+        {/each}
+    </div>
+    <div id="gradient"></div>
 </main>
 
 <style lang="scss">
     main {
+        position: relative;
+        width: max-content;
+    }
+    .scroll-container {
         height: calc(37px * 3); // 37px is the height of per child
         overflow: scroll;
         display: flex;
         flex-direction: column;
-        width: max-content;
         scroll-snap-type: y mandatory;
+
     }
-    div {
+    .time {
         margin: 0;
         width: max-content;
         color: var(--foreground-color);
         font-size: xx-large;
         scroll-snap-align: center;
+    }
+    #gradient {
+        position: absolute;
+        background: linear-gradient(to bottom, transparent, var(--background-color));
+        bottom: 0;
+        height: calc(37px * 2);
+        width: 100%;
+        pointer-events: none;
     }
 </style>
