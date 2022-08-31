@@ -74,8 +74,10 @@
   function resetTimer() {
     timerStartTime = Date.now();
     msecondPassed = 0;
+    clearTimes();
   }
-  let recordTime: any;
+  let recordTime: (millisecond: number) => void;
+  let clearTimes: () => void;
   //
   setInterval(() => {
     const date = new Date();
@@ -179,7 +181,7 @@
   {:else if currentState == ClockState.timer}
     <div class="clock-container">
       <Clock msecond={msecondPassed} {currentState} style="grid-area: clock;" />
-      <TimeList bind:recordTime style="grid-area: time-list;"/>
+      <TimeList bind:recordTime bind:clearTimes style="grid-area: time-list;"/>
     </div>
     <div class="btn-container">
       <button

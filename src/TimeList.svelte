@@ -10,6 +10,9 @@
         let newTime = `${hour}:${minute}:${second}:${ms}`;
         times = [newTime, ...times];
     }
+    export function clearTimes() {
+        times = [];
+    }
     export let style: string = "";
 </script>
 
