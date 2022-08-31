@@ -44,8 +44,8 @@
     }
     #gradient {
         position: absolute;
-        background: linear-gradient(to bottom, transparent, var(--background-color));
-        bottom: -10px;
+        background: linear-gradient(to bottom, transparent, var(--background-color) 85%);
+        bottom: -5px;
         height: calc(37px * 2);
         width: 100%;
         pointer-events: none;
