@@ -33,7 +33,9 @@
         display: flex;
         flex-direction: column;
         scroll-snap-type: y mandatory;
-
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
     .time {
         margin: 0;
