@@ -1,5 +1,6 @@
 <script lang="ts">
     export let times: string[] = [];
+    
 
     export function recordTime(millisecond: number) {
         let hour = String(Math.floor(millisecond / 3600000)).padStart(2, '0');
@@ -9,9 +10,10 @@
         let newTime = `${hour}:${minute}:${second}:${ms}`;
         times = [newTime, ...times];
     }
+    export let style: string = "";
 </script>
 
-<main>
+<main style={style}>
     <div class="scroll-container"> 
         {#each times as time}
             <div class="time">{time}</div>
@@ -43,7 +45,7 @@
     #gradient {
         position: absolute;
         background: linear-gradient(to bottom, transparent, var(--background-color));
-        bottom: 0;
+        bottom: -10px;
         height: calc(37px * 2);
         width: 100%;
         pointer-events: none;

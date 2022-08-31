@@ -3,6 +3,7 @@
 
     export let msecond: number;
 	export let currentState: ClockState;
+	export let style: string = "";
 
 	let isTyping: boolean;
 
@@ -39,7 +40,7 @@
     //     console.log(second);
     // })
 </script>
-<main class="center">
+<main style={style}>
 	{#if currentState === ClockState.countdown}
 	{#each [3600, 60, 1, -3600, -60, -1] as second}
 		<button style="grid-area: btn-{second}" on:click={() => addTime(second * 1000)} class="shadow-btn">
@@ -98,11 +99,6 @@
 	}
 	button {
 		@extend .circle-btn;
-	}
-	.center {
-		position: absolute;
-  		top: 50%;
-		transform: translateY(-50%);
 	}
     input {
 		width: 100%;

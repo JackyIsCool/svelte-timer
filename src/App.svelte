@@ -7,7 +7,7 @@
   import TimeList from "./TimeList.svelte";
 
   // Current Clock
-  let currentState: ClockState = ClockState.countdown;
+  let currentState: ClockState = ClockState.timer;
 
   // Countdown
   let isCountingDown: boolean = false;
@@ -166,15 +166,21 @@
 
 <main>
   {#if currentState == ClockState.countdown}
-    <Clock bind:msecond={msecondLeft} {currentState} />
+    <div class="clock-container">
+      <Clock bind:msecond={msecondLeft} {currentState} style="grid-area: clock;" />
+    </div>
     <div class="btn-container">
       <ToggleButton bind:value={isCountingDown} />
     </div>
   {:else if currentState == ClockState.time}
-    <Clock msecond={msecondSinceMorning} {currentState} />
+    <div class="clock-container">
+      <Clock msecond={msecondSinceMorning} {currentState} style="grid-area: clock;" />
+    </div>
   {:else if currentState == ClockState.timer}
-    <Clock msecond={msecondPassed} {currentState} />
-    <TimeList bind:recordTime />
+    <div class="clock-container">
+      <Clock msecond={msecondPassed} {currentState} style="grid-area: clock;" />
+      <TimeList bind:recordTime style="grid-area: time-list;"/>
+    </div>
     <div class="btn-container">
       <button
         id="record-time-btn"
@@ -218,5 +224,18 @@
     color: var(--foreground-color);
     font-size: large;
     padding: 0;
+  }
+  .clock-container {
+      position: absolute;
+      top: 50vh;
+      left: 50vw;
+      width: fit-content;
+      transform: translate(-50%, -50%);
+      display: grid;
+      grid-template-areas:    "."
+                              "clock"
+                              "time-list";
+      grid-template-rows: 1fr min-content 1fr;
+      justify-items: center;
   }
 </style>
