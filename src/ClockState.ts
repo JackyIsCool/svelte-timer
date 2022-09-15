@@ -1,5 +1,5 @@
 export enum ClockState {
-    countdown,
-    time,
-    timer
+  countdown,
+  time,
+  timer,
 }

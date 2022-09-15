@@ -169,19 +169,27 @@
 <main>
   {#if currentState == ClockState.countdown}
     <div class="clock-container">
-      <Clock bind:msecond={msecondLeft} {currentState} style="grid-area: clock;" />
+      <Clock
+        bind:msecond={msecondLeft}
+        {currentState}
+        style="grid-area: clock;"
+      />
     </div>
     <div class="btn-container">
       <ToggleButton bind:value={isCountingDown} />
     </div>
   {:else if currentState == ClockState.time}
     <div class="clock-container">
-      <Clock msecond={msecondSinceMorning} {currentState} style="grid-area: clock;" />
+      <Clock
+        msecond={msecondSinceMorning}
+        {currentState}
+        style="grid-area: clock;"
+      />
     </div>
   {:else if currentState == ClockState.timer}
     <div class="clock-container">
       <Clock msecond={msecondPassed} {currentState} style="grid-area: clock;" />
-      <TimeList bind:recordTime bind:clearTimes style="grid-area: time-list;"/>
+      <TimeList bind:recordTime bind:clearTimes style="grid-area: time-list;" />
     </div>
     <div class="btn-container">
       <button
@@ -228,16 +236,17 @@
     padding: 0;
   }
   .clock-container {
-      position: absolute;
-      top: 50vh;
-      left: 50vw;
-      width: fit-content;
-      transform: translate(-50%, -50%);
-      display: grid;
-      grid-template-areas:    "."
-                              "clock"
-                              "time-list";
-      grid-template-rows: 1fr min-content 1fr;
-      justify-items: center;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    width: fit-content;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-areas:
+      "."
+      "clock"
+      "time-list";
+    grid-template-rows: 1fr min-content 1fr;
+    justify-items: center;
   }
 </style>
