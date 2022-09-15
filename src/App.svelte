@@ -7,7 +7,7 @@
   import TimeList from "./TimeList.svelte";
 
   // Current Clock
-  let currentState: ClockState = ClockState.timer;
+  let currentState: ClockState = ClockState.countdown;
 
   // Countdown
   let isCountingDown: boolean = false;
