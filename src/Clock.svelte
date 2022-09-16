@@ -52,9 +52,9 @@
   {#if currentState === ClockState.countdown}
     {#each [3600, 60, 1, -3600, -60, -1] as second}
       <button
+        class="circle-btn"
         style="grid-area: btn-{second}"
         on:click={() => addTime(second * 1000)}
-        class="shadow-btn"
       >
         <img
           src={second > 0 ? "img/up_arrow.png" : "img/down_arrow.png"}
@@ -148,9 +148,6 @@
       opacity: 0.4;
       transition: 200ms;
     }
-  }
-  button {
-    @extend .circle-btn;
   }
   input {
     width: 100%;

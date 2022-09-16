@@ -45,8 +45,7 @@
 <main>
   <div class="button-container">
     <button
-      id="menu-button"
-      class="shadow-btn"
+      class="menu-button"
       class:active
       class:blue-bg={isPin}
       on:click={() => (isPin = !isPin)}
@@ -57,7 +56,7 @@
     </button>
     {#each buttons as button}
       <button
-        class="sub-button shadow-btn"
+        class="sub-button"
         class:blue-bg={currentState == button.toState}
         style="--x: {button.toX}px; --y: {button.toY}px"
         on:click={() => (currentState = button.toState)}
@@ -76,10 +75,10 @@
     right: calc(50px + 5vh);
   }
   button {
+    @extend .circle-btn;
     position: absolute;
   }
-  #menu-button {
-    @extend .circle-btn;
+  .menu-button {
     z-index: 1;
     &.active {
       ~ .sub-button {
@@ -88,7 +87,6 @@
     }
   }
   .sub-button {
-    @extend .circle-btn;
     transition: 300ms;
   }
   .blue-bg {

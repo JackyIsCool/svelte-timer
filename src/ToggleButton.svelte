@@ -6,7 +6,7 @@
 </script>
 
 <main>
-  <button on:click={toggleOnOff} class="shadow-btn">
+  <button on:click={toggleOnOff}>
     {#if value}
       <img src="img/pause.png" alt="pause" />
     {:else}

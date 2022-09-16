@@ -168,7 +168,7 @@
 
 <main>
   {#if currentState == ClockState.countdown}
-    <div class="clock-container">
+    <div class="center-container">
       <Clock
         bind:msecond={msecondLeft}
         {currentState}
@@ -179,7 +179,7 @@
       <ToggleButton bind:value={isCountingDown} />
     </div>
   {:else if currentState == ClockState.time}
-    <div class="clock-container">
+    <div class="center-container">
       <Clock
         msecond={msecondSinceMorning}
         {currentState}
@@ -187,20 +187,19 @@
       />
     </div>
   {:else if currentState == ClockState.timer}
-    <div class="clock-container">
+    <div class="center-container">
       <Clock msecond={msecondPassed} {currentState} style="grid-area: clock;" />
       <TimeList bind:recordTime bind:clearTimes style="grid-area: time-list;" />
     </div>
     <div class="btn-container">
       <button
-        id="record-time-btn"
-        class="shadow-btn circle-btn"
+        class="circle-btn-small"
         on:click={() => recordTime(msecondPassed)}
       >
         +
       </button>
       <ToggleButton bind:value={isCountingUp} />
-      <button id="restart-btn" class="shadow-btn" on:click={resetTimer}>
+      <button class="circle-btn-small" on:click={resetTimer}>
         <img src="img/restart.png" alt="" />
       </button>
     </div>
@@ -223,7 +222,7 @@
     transform: translateX(-50%);
     bottom: 6vh;
   }
-  #restart-btn {
+  .circle-btn-small {
     @extend .circle-btn;
     width: 40px;
     height: 40px;
@@ -235,13 +234,12 @@
     font-size: large;
     padding: 0;
   }
-  .clock-container {
+  .center-container {
     position: absolute;
-    top: 50vh;
-    left: 50vw;
-    width: fit-content;
-    transform: translate(-50%, -50%);
+    height: 100vh;
+    width: 100vw;
     display: grid;
+    place-content: center;
     grid-template-areas:
       "."
       "clock"
