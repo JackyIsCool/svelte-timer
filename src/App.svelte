@@ -222,11 +222,6 @@
     transform: translateX(-50%);
     bottom: 6vh;
   }
-  .circle-btn-small {
-    @extend .circle-btn;
-    width: 40px;
-    height: 40px;
-  }
   #record-time-btn {
     width: 40px;
     height: 40px;
