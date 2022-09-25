@@ -196,7 +196,7 @@
         class="circle-btn-small"
         on:click={() => recordTime(msecondPassed)}
       >
-        +
+        <img src="img/add.png" alt="add" />
       </button>
       <ToggleButton bind:value={isCountingUp} />
       <button class="circle-btn-small" on:click={resetTimer}>
