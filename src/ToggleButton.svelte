@@ -1,11 +1,12 @@
 <script lang="ts">
   export let value: boolean = false;
+  export let style: string = "";
   function toggleOnOff() {
     value = !value;
   }
 </script>
 
-<main>
+<main {style}>
   <button on:click={toggleOnOff}>
     {#if value}
       <img src="img/pause.png" alt="pause" />

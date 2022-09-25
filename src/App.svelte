@@ -176,7 +176,7 @@
       />
     </div>
     <div class="btn-container">
-      <ToggleButton bind:value={isCountingDown} />
+      <ToggleButton bind:value={isCountingDown} style="grid-area: center;" />
     </div>
   {:else if currentState == ClockState.time}
     <div class="center-container">
@@ -193,13 +193,18 @@
     </div>
     <div class="btn-container">
       <button
+        style="grid-area: left;"
         class="circle-btn-small"
         on:click={() => recordTime(msecondPassed)}
       >
         <img src="img/add.png" alt="add" />
       </button>
-      <ToggleButton bind:value={isCountingUp} />
-      <button class="circle-btn-small" on:click={resetTimer}>
+      <ToggleButton bind:value={isCountingUp} style="grid-area: `center`;" />
+      <button
+        style="grid-area: right;"
+        class="circle-btn-small"
+        on:click={resetTimer}
+      >
         <img src="img/restart.png" alt="" />
       </button>
     </div>
@@ -214,13 +219,15 @@
     text-align: center;
   }
   .btn-container {
-    display: flex;
+    display: grid;
     gap: 10px;
-    align-items: center;
     position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
     bottom: 6vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    align-items: center;
+    grid-template-columns: 1fr min-content 1fr;
+    grid-template-areas: "left center right";
   }
   #record-time-btn {
     width: 40px;
